@@ -1,0 +1,9 @@
+{
+  "format_version": "1.21.30",
+  "minecraft:texture_set": {
+    "color": "uplift_granite_cliff",
+    "normal": "uplift_granite_cliff_normal",
+    "metalness_emissive_roughness": "uplift_granite_cliff_mer"
+  }
+}
+

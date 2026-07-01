@@ -1,0 +1,9 @@
+{
+  "format_version": "1.21.30",
+  "minecraft:texture_set": {
+    "color": "uplift_roof_tiles",
+    "normal": "uplift_roof_tiles_normal",
+    "metalness_emissive_roughness": "uplift_roof_tiles_mer"
+  }
+}
+

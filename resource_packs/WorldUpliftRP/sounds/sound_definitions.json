@@ -1,0 +1,33 @@
+{
+  "format_version": "1.20.80",
+  "sound_definitions": {
+    "uplift.ambient.high_mountain": {
+      "category": "ambient",
+      "sounds": []
+    },
+    "uplift.ambient.city": {
+      "category": "ambient",
+      "sounds": []
+    },
+    "uplift.deep_crack": {
+      "category": "ambient",
+      "sounds": []
+    },
+    "uplift.crop_harvest": {
+      "category": "block",
+      "sounds": []
+    },
+    "uplift.repair_sparkle": {
+      "category": "player",
+      "sounds": []
+    },
+    "uplift.bridge_place": {
+      "category": "block",
+      "sounds": []
+    },
+    "uplift.xp_clump_merge": {
+      "category": "player",
+      "sounds": []
+    }
+  }
+}

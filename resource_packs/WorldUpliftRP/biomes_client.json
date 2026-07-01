@@ -1,0 +1,23 @@
+{
+  "biomes": {
+    "uplift:alpine_peaks": {
+      "water_surface_color": "#8fb7c9",
+      "water_surface_transparency": 0.55,
+      "water_fog_color": "#7b9aad",
+      "water_fog_distance": 24
+    },
+    "uplift:deep_valleys": {
+      "water_surface_color": "#4f826b",
+      "water_surface_transparency": 0.45,
+      "water_fog_color": "#29483e",
+      "water_fog_distance": 18
+    },
+    "uplift:city_plains": {
+      "water_surface_color": "#6f9f91",
+      "water_surface_transparency": 0.35,
+      "water_fog_color": "#4f746d",
+      "water_fog_distance": 28
+    }
+  }
+}
+

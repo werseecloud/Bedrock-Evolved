@@ -1,0 +1,32 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:fog_settings": {
+    "description": {
+      "identifier": "uplift:storm_mountain_fog"
+    },
+    "distance": {
+      "air": {
+        "fog_start": 0.06,
+        "fog_end": 0.55,
+        "fog_color": "#6f7d84",
+        "render_distance_type": "render"
+      },
+      "water": {
+        "fog_start": 0.0,
+        "fog_end": 0.24,
+        "fog_color": "#31454b",
+        "render_distance_type": "render"
+      }
+    },
+    "volumetric": {
+      "density": {
+        "air": {
+          "max_density": 0.18,
+          "max_density_height": 120,
+          "zero_density_height": 250
+        }
+      }
+    }
+  }
+}
+

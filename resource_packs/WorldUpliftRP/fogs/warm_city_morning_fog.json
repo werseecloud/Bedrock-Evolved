@@ -1,0 +1,32 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:fog_settings": {
+    "description": {
+      "identifier": "uplift:warm_city_morning_fog"
+    },
+    "distance": {
+      "air": {
+        "fog_start": 0.22,
+        "fog_end": 0.94,
+        "fog_color": "#d3c1a4",
+        "render_distance_type": "render"
+      },
+      "water": {
+        "fog_start": 0.0,
+        "fog_end": 0.46,
+        "fog_color": "#647a70",
+        "render_distance_type": "render"
+      }
+    },
+    "volumetric": {
+      "density": {
+        "air": {
+          "max_density": 0.045,
+          "max_density_height": 70,
+          "zero_density_height": 170
+        }
+      }
+    }
+  }
+}
+

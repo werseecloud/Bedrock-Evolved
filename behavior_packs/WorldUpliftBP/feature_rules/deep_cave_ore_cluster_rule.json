@@ -1,0 +1,36 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:feature_rules": {
+    "description": {
+      "identifier": "uplift:deep_cave_ore_cluster_rule",
+      "places_feature": "uplift:deep_cave_ore_cluster"
+    },
+    "conditions": {
+      "placement_pass": "underground_pass",
+      "minecraft:biome_filter": [
+        {
+          "test": "has_biome_tag",
+          "operator": "==",
+          "value": "uplift"
+        }
+      ]
+    },
+    "distribution": {
+      "iterations": 3,
+      "scatter_chance": 45.0,
+      "x": {
+        "distribution": "uniform",
+        "extent": [0, 15]
+      },
+      "y": {
+        "distribution": "uniform",
+        "extent": [-64, 48]
+      },
+      "z": {
+        "distribution": "uniform",
+        "extent": [0, 15]
+      }
+    }
+  }
+}
+

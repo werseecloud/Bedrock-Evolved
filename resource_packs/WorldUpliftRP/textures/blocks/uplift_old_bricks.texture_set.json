@@ -1,0 +1,9 @@
+{
+  "format_version": "1.21.30",
+  "minecraft:texture_set": {
+    "color": "uplift_old_bricks",
+    "normal": "uplift_old_bricks_normal",
+    "metalness_emissive_roughness": "uplift_old_bricks_mer"
+  }
+}
+

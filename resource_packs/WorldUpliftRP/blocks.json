@@ -1,0 +1,28 @@
+{
+  "format_version": [1, 1, 0],
+  "uplift:granite_cliff": {
+    "textures": "uplift_granite_cliff",
+    "sound": "stone"
+  },
+  "uplift:snow_rock": {
+    "textures": "uplift_snow_rock",
+    "sound": "stone"
+  },
+  "uplift:wet_stone": {
+    "textures": "uplift_wet_stone",
+    "sound": "stone"
+  },
+  "uplift:city_road": {
+    "textures": "uplift_city_road",
+    "sound": "gravel"
+  },
+  "uplift:old_bricks": {
+    "textures": "uplift_old_bricks",
+    "sound": "stone"
+  },
+  "uplift:roof_tiles": {
+    "textures": "uplift_roof_tiles",
+    "sound": "stone"
+  }
+}
+

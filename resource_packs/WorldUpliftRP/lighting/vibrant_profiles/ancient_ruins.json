@@ -1,0 +1,26 @@
+{
+  "format_version": "1.21.120",
+  "minecraft:lighting_settings": {
+    "description": {
+      "identifier": "uplift:ancient_ruins"
+    },
+    "directional_lights": {
+      "sun": {
+        "illuminance": 56000,
+        "color": "#cabda6"
+      },
+      "moon": {
+        "illuminance": 0.18,
+        "color": "#aebad0"
+      }
+    },
+    "emissive": {
+      "desaturation": 0.1
+    },
+    "ambient": {
+      "illuminance": 0.18,
+      "color": "#9f9384"
+    }
+  }
+}
+

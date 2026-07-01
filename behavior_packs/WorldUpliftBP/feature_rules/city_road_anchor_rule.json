@@ -1,0 +1,36 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:feature_rules": {
+    "description": {
+      "identifier": "uplift:city_road_anchor_rule",
+      "places_feature": "uplift:city_road_anchor_feature"
+    },
+    "conditions": {
+      "placement_pass": "surface_pass",
+      "minecraft:biome_filter": [
+        {
+          "test": "has_biome_tag",
+          "operator": "==",
+          "value": "uplift_city_plains"
+        }
+      ]
+    },
+    "distribution": {
+      "iterations": 2,
+      "scatter_chance": 8.0,
+      "x": {
+        "distribution": "uniform",
+        "extent": [0, 15]
+      },
+      "y": {
+        "distribution": "uniform",
+        "extent": [60, 90]
+      },
+      "z": {
+        "distribution": "uniform",
+        "extent": [0, 15]
+      }
+    }
+  }
+}
+

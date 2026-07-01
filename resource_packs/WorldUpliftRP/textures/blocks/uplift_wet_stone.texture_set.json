@@ -1,0 +1,9 @@
+{
+  "format_version": "1.21.30",
+  "minecraft:texture_set": {
+    "color": "uplift_wet_stone",
+    "normal": "uplift_wet_stone_normal",
+    "metalness_emissive_roughness": "uplift_wet_stone_mer"
+  }
+}
+

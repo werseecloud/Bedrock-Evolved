@@ -1,0 +1,35 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:single_block_feature": {
+    "description": {
+      "identifier": "uplift:city_road_anchor_feature"
+    },
+    "places_block": [
+      {
+        "block": "minecraft:gravel",
+        "weight": 4
+      },
+      {
+        "block": "minecraft:cobblestone",
+        "weight": 1
+      }
+    ],
+    "enforce_placement_rules": false,
+    "enforce_survivability_rules": false,
+    "may_attach_to": {
+      "bottom": [
+        "minecraft:grass_block",
+        "minecraft:dirt",
+        "minecraft:coarse_dirt",
+        "minecraft:podzol"
+      ]
+    },
+    "may_replace": [
+      "minecraft:air",
+      "minecraft:tallgrass",
+      "minecraft:grass",
+      "minecraft:snow"
+    ]
+  }
+}
+

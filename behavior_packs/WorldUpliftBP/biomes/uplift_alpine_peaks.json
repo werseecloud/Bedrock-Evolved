@@ -1,0 +1,51 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:biome": {
+    "description": {
+      "identifier": "uplift:alpine_peaks"
+    },
+    "components": {
+      "minecraft:climate": {
+        "temperature": 0.05,
+        "downfall": 0.85,
+        "snow_accumulation": [0.6, 1.0],
+        "ash": 0.0,
+        "red_spores": 0.0,
+        "white_ash": 0.0
+      },
+      "minecraft:overworld_height": {
+        "noise_type": "mountains"
+      },
+      "minecraft:surface_parameters": {
+        "sea_floor_depth": 7,
+        "sea_floor_material": "minecraft:gravel",
+        "foundation_material": "minecraft:deepslate",
+        "mid_material": "minecraft:stone",
+        "top_material": "minecraft:snow",
+        "sea_material": "minecraft:water"
+      },
+      "minecraft:overworld_generation_rules": {
+        "hills_transformation": "uplift:shattered_cliffs",
+        "generate_for_climates": [
+          ["frozen", 9],
+          ["cold", 7],
+          ["medium", 2]
+        ]
+      },
+      "minecraft:fog_appearance": {
+        "fog_identifier": "uplift:alpine_peak_vibrant_fog"
+      },
+      "minecraft:tags": {
+        "tags": [
+          "overworld",
+          "mountain",
+          "cold",
+          "snowy",
+          "uplift",
+          "uplift_alpine_peaks",
+          "uplift_mountain"
+        ]
+      }
+    }
+  }
+}

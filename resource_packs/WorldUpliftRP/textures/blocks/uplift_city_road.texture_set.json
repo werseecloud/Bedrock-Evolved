@@ -1,0 +1,9 @@
+{
+  "format_version": "1.21.30",
+  "minecraft:texture_set": {
+    "color": "uplift_city_road",
+    "normal": "uplift_city_road_normal",
+    "metalness_emissive_roughness": "uplift_city_road_mer"
+  }
+}
+

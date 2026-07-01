@@ -1,0 +1,35 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:ore_feature": {
+    "description": {
+      "identifier": "uplift:deep_cave_ore_cluster"
+    },
+    "count": 18,
+    "discard_chance_on_air_exposure": 0.25,
+    "replace_rules": [
+      {
+        "places_block": "minecraft:deepslate_iron_ore",
+        "may_replace": [
+          "minecraft:deepslate",
+          "minecraft:tuff"
+        ]
+      },
+      {
+        "places_block": "minecraft:raw_copper_block",
+        "may_replace": [
+          "minecraft:stone",
+          "minecraft:andesite",
+          "minecraft:deepslate"
+        ]
+      },
+      {
+        "places_block": "minecraft:lapis_ore",
+        "may_replace": [
+          "minecraft:stone",
+          "minecraft:deepslate"
+        ]
+      }
+    ]
+  }
+}
+

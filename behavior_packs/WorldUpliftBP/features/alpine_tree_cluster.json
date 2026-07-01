@@ -1,0 +1,63 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:tree_feature": {
+    "description": {
+      "identifier": "uplift:alpine_tree_cluster"
+    },
+    "trunk": {
+      "trunk_height": {
+        "base": 7,
+        "intervals": [3, 2]
+      },
+      "trunk_block": {
+        "name": "minecraft:log",
+        "states": {
+          "old_log_type": "spruce"
+        }
+      }
+    },
+    "spruce_canopy": {
+      "lower_offset": {
+        "range_min": 1,
+        "range_max": 3
+      },
+      "upper_offset": {
+        "range_min": 0,
+        "range_max": 1
+      },
+      "max_radius": 3,
+      "leaf_block": {
+        "name": "minecraft:spruce_leaves"
+      }
+    },
+    "base_block": [
+      "minecraft:grass_block",
+      "minecraft:podzol",
+      "minecraft:dirt",
+      "minecraft:coarse_dirt"
+    ],
+    "may_grow_on": [
+      "minecraft:grass_block",
+      "minecraft:podzol",
+      "minecraft:dirt",
+      "minecraft:coarse_dirt",
+      "minecraft:moss_block"
+    ],
+    "may_replace": [
+      "minecraft:air",
+      "minecraft:tallgrass",
+      "minecraft:grass",
+      "minecraft:snow",
+      "minecraft:spruce_leaves",
+      "minecraft:azalea_leaves",
+      "minecraft:azalea_leaves_flowered"
+    ],
+    "may_grow_through": [
+      "minecraft:air",
+      "minecraft:tallgrass",
+      "minecraft:grass",
+      "minecraft:snow"
+    ]
+  }
+}
+

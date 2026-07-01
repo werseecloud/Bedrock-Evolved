@@ -1,0 +1,32 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:fog_settings": {
+    "description": {
+      "identifier": "uplift:alpine_peak_vibrant_fog"
+    },
+    "distance": {
+      "air": {
+        "fog_start": 0.04,
+        "fog_end": 0.78,
+        "fog_color": "#e6f2fb",
+        "render_distance_type": "render"
+      },
+      "water": {
+        "fog_start": 0.0,
+        "fog_end": 0.38,
+        "fog_color": "#88a8ba",
+        "render_distance_type": "render"
+      }
+    },
+    "volumetric": {
+      "density": {
+        "air": {
+          "max_density": 0.09,
+          "max_density_height": 180,
+          "zero_density_height": 285
+        }
+      }
+    }
+  }
+}
+

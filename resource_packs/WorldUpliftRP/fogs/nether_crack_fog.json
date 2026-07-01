@@ -1,0 +1,32 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:fog_settings": {
+    "description": {
+      "identifier": "uplift:nether_crack_fog"
+    },
+    "distance": {
+      "air": {
+        "fog_start": 0.02,
+        "fog_end": 0.42,
+        "fog_color": "#7b2d25",
+        "render_distance_type": "render"
+      },
+      "water": {
+        "fog_start": 0.0,
+        "fog_end": 0.2,
+        "fog_color": "#391a1c",
+        "render_distance_type": "render"
+      }
+    },
+    "volumetric": {
+      "density": {
+        "air": {
+          "max_density": 0.16,
+          "max_density_height": 40,
+          "zero_density_height": 120
+        }
+      }
+    }
+  }
+}
+

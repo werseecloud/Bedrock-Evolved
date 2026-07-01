@@ -1,0 +1,48 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:biome": {
+    "description": {
+      "identifier": "uplift:city_plains"
+    },
+    "components": {
+      "minecraft:climate": {
+        "temperature": 0.65,
+        "downfall": 0.45,
+        "snow_accumulation": [0.0, 0.0],
+        "ash": 0.0,
+        "red_spores": 0.0,
+        "white_ash": 0.0
+      },
+      "minecraft:overworld_height": {
+        "noise_type": "lowlands"
+      },
+      "minecraft:surface_parameters": {
+        "sea_floor_depth": 5,
+        "sea_floor_material": "minecraft:gravel",
+        "foundation_material": "minecraft:stone",
+        "mid_material": "minecraft:dirt",
+        "top_material": "minecraft:grass_block",
+        "sea_material": "minecraft:water"
+      },
+      "minecraft:overworld_generation_rules": {
+        "shore_transformation": "uplift:deep_valleys",
+        "generate_for_climates": [
+          ["medium", 6],
+          ["warm", 6]
+        ]
+      },
+      "minecraft:fog_appearance": {
+        "fog_identifier": "uplift:warm_city_morning_fog"
+      },
+      "minecraft:tags": {
+        "tags": [
+          "overworld",
+          "plains",
+          "village",
+          "uplift",
+          "uplift_city_plains"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "format_version": "1.21.120",
+  "minecraft:lighting_settings": {
+    "description": {
+      "identifier": "uplift:city_plains"
+    },
+    "directional_lights": {
+      "sun": {
+        "illuminance": 72000,
+        "color": "#ffe0b6"
+      },
+      "moon": {
+        "illuminance": 0.2,
+        "color": "#c3d2ff"
+      }
+    },
+    "emissive": {
+      "desaturation": 0.0
+    },
+    "ambient": {
+      "illuminance": 0.22,
+      "color": "#d7c4a3"
+    }
+  }
+}
+

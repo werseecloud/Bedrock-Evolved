@@ -1,0 +1,50 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:biome": {
+    "description": {
+      "identifier": "uplift:shattered_cliffs"
+    },
+    "components": {
+      "minecraft:climate": {
+        "temperature": 0.25,
+        "downfall": 0.55,
+        "snow_accumulation": [0.1, 0.55],
+        "ash": 0.0,
+        "red_spores": 0.0,
+        "white_ash": 0.0
+      },
+      "minecraft:overworld_height": {
+        "noise_type": "mountains"
+      },
+      "minecraft:surface_parameters": {
+        "sea_floor_depth": 5,
+        "sea_floor_material": "minecraft:gravel",
+        "foundation_material": "minecraft:deepslate",
+        "mid_material": "minecraft:andesite",
+        "top_material": "minecraft:stone",
+        "sea_material": "minecraft:water"
+      },
+      "minecraft:overworld_generation_rules": {
+        "mutate_transformation": "uplift:deep_valleys",
+        "generate_for_climates": [
+          ["cold", 7],
+          ["medium", 4],
+          ["frozen", 2]
+        ]
+      },
+      "minecraft:fog_appearance": {
+        "fog_identifier": "uplift:storm_mountain_fog"
+      },
+      "minecraft:tags": {
+        "tags": [
+          "overworld",
+          "mountain",
+          "cliff",
+          "uplift",
+          "uplift_shattered_cliffs",
+          "uplift_mountain"
+        ]
+      }
+    }
+  }
+}

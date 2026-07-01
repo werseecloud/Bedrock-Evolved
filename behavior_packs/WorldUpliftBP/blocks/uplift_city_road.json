@@ -1,0 +1,27 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "uplift:city_road",
+      "menu_category": {
+        "category": "construction"
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.9
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 4.0
+      },
+      "minecraft:map_color": "#5d5a50",
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "uplift_city_road",
+          "render_method": "opaque"
+        }
+      }
+    }
+  }
+}
+

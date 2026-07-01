@@ -1,0 +1,26 @@
+{
+  "format_version": "1.21.120",
+  "minecraft:lighting_settings": {
+    "description": {
+      "identifier": "uplift:deep_valleys"
+    },
+    "directional_lights": {
+      "sun": {
+        "illuminance": 62000,
+        "color": "#d4eadc"
+      },
+      "moon": {
+        "illuminance": 0.22,
+        "color": "#9fbec8"
+      }
+    },
+    "emissive": {
+      "desaturation": 0.0
+    },
+    "ambient": {
+      "illuminance": 0.26,
+      "color": "#abc9ba"
+    }
+  }
+}
+

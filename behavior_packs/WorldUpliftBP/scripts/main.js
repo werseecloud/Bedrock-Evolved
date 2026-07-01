@@ -1,0 +1,32 @@
+import { system } from "@minecraft/server";
+import { Logger } from "./utils/logger.js";
+import { initStructurePlacer } from "./cities/structurePlacer.js";
+import { initCityRegistry } from "./cities/cityRegistry.js";
+import { initBottomTransition } from "./terrain/bottomTransition.js";
+import { initChunkScanner } from "./terrain/chunkScanner.js";
+import { initMegaRegionDecorator } from "./terrain/megaRegionDecorator.js";
+import { initScriptEvents } from "./commands/scriptEvents.js";
+import { initLodManager } from "./lod/lodManager.js";
+import { initCameraController } from "./camera/cameraController.js";
+import { initRightClickHarvest } from "./harvest/harvestController.js";
+import { initBetterMending } from "./better_mending/betterMendingController.js";
+import { initBridging } from "./bridging/bridgingController.js";
+import { initClumps } from "./clumps/clumpsController.js";
+import { initGuideBook } from "./guide/guideBook.js";
+
+system.run(() => {
+  initStructurePlacer();
+  initCityRegistry();
+  initBottomTransition();
+  initChunkScanner();
+  initMegaRegionDecorator();
+  initLodManager();
+  initCameraController();
+  initRightClickHarvest();
+  initBetterMending();
+  initBridging();
+  initClumps();
+  initGuideBook();
+  initScriptEvents();
+  Logger.info("World Uplift scripts initialized.");
+});

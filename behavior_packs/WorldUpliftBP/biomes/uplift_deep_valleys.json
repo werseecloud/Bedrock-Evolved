@@ -1,0 +1,49 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:biome": {
+    "description": {
+      "identifier": "uplift:deep_valleys"
+    },
+    "components": {
+      "minecraft:climate": {
+        "temperature": 0.4,
+        "downfall": 0.75,
+        "snow_accumulation": [0.0, 0.1],
+        "ash": 0.0,
+        "red_spores": 0.0,
+        "white_ash": 0.0
+      },
+      "minecraft:overworld_height": {
+        "noise_type": "river"
+      },
+      "minecraft:surface_parameters": {
+        "sea_floor_depth": 9,
+        "sea_floor_material": "minecraft:gravel",
+        "foundation_material": "minecraft:stone",
+        "mid_material": "minecraft:moss_block",
+        "top_material": "minecraft:grass_block",
+        "sea_material": "minecraft:water"
+      },
+      "minecraft:overworld_generation_rules": {
+        "shore_transformation": "uplift:old_growth_highlands",
+        "generate_for_climates": [
+          ["cold", 3],
+          ["medium", 6],
+          ["warm", 3]
+        ]
+      },
+      "minecraft:fog_appearance": {
+        "fog_identifier": "uplift:deep_valley_vibrant_fog"
+      },
+      "minecraft:tags": {
+        "tags": [
+          "overworld",
+          "valley",
+          "lush",
+          "uplift",
+          "uplift_deep_valleys"
+        ]
+      }
+    }
+  }
+}

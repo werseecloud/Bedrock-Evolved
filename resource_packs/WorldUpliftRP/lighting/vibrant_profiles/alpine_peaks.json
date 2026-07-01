@@ -1,0 +1,26 @@
+{
+  "format_version": "1.21.120",
+  "minecraft:lighting_settings": {
+    "description": {
+      "identifier": "uplift:alpine_peaks"
+    },
+    "directional_lights": {
+      "sun": {
+        "illuminance": 95000,
+        "color": "#f4fbff"
+      },
+      "moon": {
+        "illuminance": 0.25,
+        "color": "#b9d2ff"
+      }
+    },
+    "emissive": {
+      "desaturation": 0.0
+    },
+    "ambient": {
+      "illuminance": 0.18,
+      "color": "#dcefff"
+    }
+  }
+}
+

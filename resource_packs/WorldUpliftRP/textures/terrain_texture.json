@@ -1,0 +1,26 @@
+{
+  "resource_pack_name": "WorldUpliftRP",
+  "texture_name": "atlas.terrain",
+  "padding": 8,
+  "num_mip_levels": 4,
+  "texture_data": {
+    "uplift_granite_cliff": {
+      "textures": "textures/blocks/uplift_granite_cliff"
+    },
+    "uplift_snow_rock": {
+      "textures": "textures/blocks/uplift_snow_rock"
+    },
+    "uplift_wet_stone": {
+      "textures": "textures/blocks/uplift_wet_stone"
+    },
+    "uplift_city_road": {
+      "textures": "textures/blocks/uplift_city_road"
+    },
+    "uplift_old_bricks": {
+      "textures": "textures/blocks/uplift_old_bricks"
+    },
+    "uplift_roof_tiles": {
+      "textures": "textures/blocks/uplift_roof_tiles"
+    }
+  }
+}
