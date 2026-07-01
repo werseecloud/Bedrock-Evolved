@@ -3,6 +3,7 @@ import { MutableConfig } from "../config.js";
 import { Logger } from "../utils/logger.js";
 import { distance2D } from "../utils/vectors.js";
 import { generateCityName } from "./cityPlanner.js";
+import { getPerformanceProfile, registerCityRegistryApi } from "../performance/performanceManager.js";
 
 const REGISTRY_KEY = "wu:city_registry";
 const cities = [];
@@ -10,6 +11,10 @@ let loaded = false;
 
 export function initCityRegistry() {
   loadCities();
+  registerCityRegistryApi({
+    getCities,
+    updateCity
+  });
 }
 
 export function loadCities() {
@@ -65,6 +70,13 @@ export function createCity(anchor, type = "small_town") {
     buildings: [],
     districts: [],
     populationEstimate: anchor.populationEstimate || 0,
+    activeEntityCaps: {
+      villagers: 20,
+      guards: getPerformanceProfile().guardsPerCity,
+      builders: 3,
+      miners: 3,
+      recruiters: 2
+    },
     resources: {
       food: 20,
       stone: 15,
@@ -137,7 +149,10 @@ export function raiseCityGuard(cityId, amount) {
   if (!city) {
     return undefined;
   }
-  city.guards = Math.max(0, Number(city.guards || 0) + Number(amount || 1));
+  const cap = getPerformanceProfile().guardsPerCity;
+  city.activeEntityCaps = city.activeEntityCaps || {};
+  city.activeEntityCaps.guards = cap;
+  city.guards = Math.min(cap, Math.max(0, Number(city.guards || 0) + Number(amount || 1)));
   updateCity(city);
   return city;
 }
@@ -167,4 +182,3 @@ export function formatCityStatus(city) {
     .join(", ");
   return `${city.name} (${city.type}) id=${city.cityId} stage=${city.stage} pop=${city.populationEstimate} guards=${city.guards} buildings=${city.buildings.length} districts=${city.districts.length} resources=[${resources}]`;
 }
-

@@ -9,9 +9,16 @@ import { runPathFragmentPass } from "./pathFragmentDecorator.js";
 import { runCoastalPass } from "./coastalDecorator.js";
 import { runValleyFogPass } from "./valleyFogController.js";
 import { tryGenerateLandmarkNearPlayer } from "./landmarkTracker.js";
+import { isModuleUsable, recordModuleError } from "../performance/performanceManager.js";
 
 const decoratedChunks = new Set();
 const lastPlayerScan = new Map();
+const lastPassTicks = {
+  scenic: 0,
+  snowline: 0,
+  waterfall: 0,
+  landmark: 0
+};
 let initialized = false;
 
 export function initPostGenerationDecorators() {
@@ -19,7 +26,7 @@ export function initPostGenerationDecorators() {
     return;
   }
   initialized = true;
-  system.runInterval(tickTerrainDecorators, 20);
+  system.runInterval(tickTerrainDecorators, 40);
   Logger.info("Terrain Uplift decorators initialized.");
 }
 
@@ -43,39 +50,55 @@ export function getDecoratedTerrainChunkCount() {
 }
 
 function tickTerrainDecorators() {
-  if (!TERRAIN_CONFIG.enabled) {
+  if (!TERRAIN_CONFIG.enabled || !isModuleUsable("terrain")) {
     return;
   }
   const settings = getTerrainProfileSettings();
+  const due = {
+    scenic: isPassDue("scenic", settings.scenicInterval),
+    snowline: isPassDue("snowline", settings.snowlineInterval),
+    waterfall: isPassDue("waterfall", settings.waterfallInterval),
+    landmark: isPassDue("landmark", settings.landmarkInterval)
+  };
   for (const player of world.getPlayers()) {
     try {
       if (!shouldScanPlayer(player)) {
         continue;
       }
       markNearbyChunk(player);
-      if (system.currentTick % settings.scenicInterval === 0) {
+      if (due.scenic) {
         runForestDensityPass(player);
         runPathFragmentPass(player);
         runCaveEntrancePass(player);
         runCoastalPass(player);
         runValleyFogPass(player);
       }
-      if (system.currentTick % settings.snowlineInterval === 0) {
+      if (due.snowline) {
         runSnowlinePass(player);
       }
-      if (system.currentTick % settings.waterfallInterval === 0) {
+      if (due.waterfall) {
         runWaterfallPass(player);
       }
-      if (system.currentTick % settings.landmarkInterval === 0) {
+      if (due.landmark) {
         tryGenerateLandmarkNearPlayer(player);
       }
     } catch (error) {
+      recordModuleError("terrain", error);
       Logger.debug(`Terrain decorator skipped: ${error}`);
     }
   }
   if (decoratedChunks.size > 12000) {
     decoratedChunks.clear();
   }
+}
+
+function isPassDue(key, intervalTicks) {
+  const interval = Math.max(40, Number(intervalTicks || 100));
+  if (system.currentTick - lastPassTicks[key] < interval) {
+    return false;
+  }
+  lastPassTicks[key] = system.currentTick;
+  return true;
 }
 
 function shouldScanPlayer(player) {

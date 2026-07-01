@@ -1,11 +1,15 @@
 import { CONFIG } from "../config.js";
 import { Logger } from "../utils/logger.js";
+import { requestEntityChecks, recordModuleError } from "../performance/performanceManager.js";
 
 const XP_TYPES = ["minecraft:xp_orb", "minecraft:experience_orb"];
 
 export function scanXpOrbsAroundPlayer(player) {
   const results = [];
   for (const type of XP_TYPES) {
+    if (!requestEntityChecks("clumps", 4)) {
+      break;
+    }
     try {
       const orbs = player.dimension.getEntities({
         type,
@@ -17,6 +21,7 @@ export function scanXpOrbsAroundPlayer(player) {
         break;
       }
     } catch (error) {
+      recordModuleError("clumps", error);
       if (CONFIG.clumps.debug) {
         Logger.debug(`XP orb query failed for ${type}: ${error}`);
       }
@@ -24,4 +29,3 @@ export function scanXpOrbsAroundPlayer(player) {
   }
   return results;
 }
-

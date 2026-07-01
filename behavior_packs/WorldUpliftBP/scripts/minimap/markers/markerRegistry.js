@@ -8,6 +8,7 @@ import { clusterMarkers } from "./markerClustering.js";
 import { sortMarkersByPriority } from "./markerPriority.js";
 import { pruneExpiredTemporaryWaypoints } from "../waypoints/temporaryWaypointManager.js";
 import { MINIMAP_UI_CONFIG } from "../minimapConfig.js";
+import { isModuleUsable, requestEntityChecks, recordModuleError } from "../../performance/performanceManager.js";
 
 export function gatherMarkersForPlayer(player, mode = "small") {
   const state = getMinimapState(player);
@@ -104,12 +105,18 @@ function getPlayerMarkers(player) {
 
 function getEntityMarkers(player) {
   const markers = [];
+  if (!isModuleUsable("minimap_entities") || !requestEntityChecks("minimap_entities", 4)) {
+    return markers;
+  }
   try {
     const entities = player.dimension.getEntities({
       location: player.location,
       maxDistance: 48
     });
     for (const entity of entities.slice(0, 40)) {
+      if (!requestEntityChecks("minimap_entities")) {
+        break;
+      }
       if (!entity || entity.typeId === "minecraft:player" || entity.typeId.includes("item") || entity.typeId.includes("xp")) {
         continue;
       }
@@ -127,7 +134,8 @@ function getEntityMarkers(player) {
         icon: hostile ? "hostile" : "passive"
       }));
     }
-  } catch (_error) {
+  } catch (error) {
+    recordModuleError("minimap_entities", error);
     return markers;
   }
   return markers;

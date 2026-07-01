@@ -40,10 +40,10 @@ export const MINIMAP_UI_CONFIG = {
   },
 
   profiles: {
-    performance: { smallGrid: 9, fullscreenGrid: 17, updateIntervalTicks: 20, markerCap: 16 },
-    balanced: { smallGrid: 13, fullscreenGrid: 25, updateIntervalTicks: 10, markerCap: 32 },
-    cinematic: { smallGrid: 15, fullscreenGrid: 33, updateIntervalTicks: 8, markerCap: 48 },
-    server: { smallGrid: 7, fullscreenGrid: 13, updateIntervalTicks: 30, markerCap: 10 }
+    performance: { smallGrid: 9, fullscreenGrid: 17, updateIntervalTicks: 30, markerCap: 16 },
+    balanced: { smallGrid: 13, fullscreenGrid: 25, updateIntervalTicks: 15, markerCap: 32 },
+    cinematic: { smallGrid: 17, fullscreenGrid: 33, updateIntervalTicks: 10, markerCap: 48 },
+    server: { smallGrid: 7, fullscreenGrid: 13, updateIntervalTicks: 40, markerCap: 8 }
   },
 
   safety: {

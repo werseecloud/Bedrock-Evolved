@@ -1,6 +1,12 @@
 import { system, world } from "@minecraft/server";
 import { MutableConfig, SAFE_OVERWRITE_BLOCKS } from "../config.js";
 import { Logger } from "../utils/logger.js";
+import {
+  isModuleUsable,
+  requestBlockOps,
+  requestStructurePlacement,
+  recordModuleError
+} from "../performance/performanceManager.js";
 
 const placementQueue = [];
 const missingStructures = new Set();
@@ -68,6 +74,9 @@ export function queueSimplePlatform(dimension, center, radius, blockType) {
 }
 
 export function processPlacementQueue() {
+  if (!isModuleUsable("structure_queue")) {
+    return;
+  }
   let blockOps = 0;
   let structures = 0;
 
@@ -75,7 +84,7 @@ export function processPlacementQueue() {
     const task = placementQueue[0];
 
     if (task.kind === "block") {
-      if (blockOps >= MutableConfig.MAX_BLOCK_OPS_PER_TICK) {
+      if (blockOps >= MutableConfig.MAX_BLOCK_OPS_PER_TICK || !requestBlockOps("structure_queue")) {
         return;
       }
       placementQueue.shift();
@@ -85,7 +94,7 @@ export function processPlacementQueue() {
     }
 
     if (task.kind === "structure") {
-      if (structures >= MutableConfig.STRUCTURE_PLACEMENT_BATCH_SIZE) {
+      if (structures >= MutableConfig.STRUCTURE_PLACEMENT_BATCH_SIZE || !requestStructurePlacement("structure_queue")) {
         return;
       }
       placementQueue.shift();
@@ -109,6 +118,7 @@ function placeBlockTask(task) {
     }
     block.setType(task.blockType);
   } catch (error) {
+    recordModuleError("structure_queue", error);
     Logger.debug(`Block placement skipped at ${formatLocation(task.location)}: ${error}`);
   }
 }
@@ -140,11 +150,19 @@ function placeStructureTask(task) {
     });
     Logger.debug(`Queued structure ${identifier} at ${formatLocation(location)}.`);
   } catch (error) {
+    recordModuleError("structure_queue", error);
     Logger.warn(`Structure ${identifier} failed at ${formatLocation(location)}: ${error}`);
     if (typeof fallback === "function") {
       fallback();
     }
   }
+}
+
+export function getPlacementQueueStatus() {
+  return {
+    queued: placementQueue.length,
+    missingStructures: missingStructures.size
+  };
 }
 
 export function structureExists(identifier) {
@@ -224,4 +242,3 @@ export function queueFallbackBuilding(dimension, origin, size, floorBlock, wallB
 function formatLocation(location) {
   return `${Math.floor(location.x)} ${Math.floor(location.y)} ${Math.floor(location.z)}`;
 }
-

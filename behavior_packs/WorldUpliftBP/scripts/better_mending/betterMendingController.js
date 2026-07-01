@@ -6,6 +6,7 @@ import { getSelectedItem } from "../utils/inventory.js";
 import { hasFeaturePermission } from "../utils/permissions.js";
 import { passesMendingRequirement } from "./mendingDetector.js";
 import { tryRepairHeldItem } from "./repairService.js";
+import { requestParticles } from "../performance/performanceManager.js";
 
 let initialized = false;
 
@@ -100,7 +101,7 @@ function playEffects(player) {
       // Best effort.
     }
   }
-  if (CONFIG.betterMending.showParticles) {
+  if (CONFIG.betterMending.showParticles && requestParticles("better_mending", 1)) {
     try {
       player.dimension.spawnParticle("uplift:repair_sparkle", player.location);
     } catch (_error) {

@@ -1,6 +1,8 @@
+import { system } from "@minecraft/server";
 import { getProfileSettings } from "./minimapUiState.js";
 
 const CACHE = new Map();
+const CACHE_TTL_TICKS = 600;
 
 export function renderMapGrid(player, state, mode = "small") {
   const profile = getProfileSettings(state);
@@ -27,8 +29,9 @@ export function renderMapGrid(player, state, mode = "small") {
 
 export function sampleTerrainGlyph(dimension, x, z, nearY) {
   const key = `${dimension.id}:${Math.floor(x / 8)},${Math.floor(z / 8)},${Math.floor(nearY / 16)}`;
-  if (CACHE.has(key)) {
-    return CACHE.get(key);
+  const cached = CACHE.get(key);
+  if (cached && system.currentTick - cached.tick <= CACHE_TTL_TICKS) {
+    return cached.glyph;
   }
   if (CACHE.size > 4096) {
     CACHE.clear();
@@ -44,7 +47,7 @@ export function sampleTerrainGlyph(dimension, x, z, nearY) {
       glyph = "?";
     }
   }
-  CACHE.set(key, glyph);
+  CACHE.set(key, { glyph, tick: system.currentTick });
   return glyph;
 }
 

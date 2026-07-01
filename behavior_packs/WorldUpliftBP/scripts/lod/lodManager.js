@@ -67,6 +67,6 @@ export function handlePerformanceCommand(source, args) {
     Logger.tell(source, "Unknown performance mode. Use performance, balanced, or cinematic.");
     return;
   }
-  MutableConfig.MAX_BLOCK_OPS_PER_TICK = LODConfig.LOD_BLOCK_OPS_PER_TICK;
+  MutableConfig.MAX_BLOCK_OPS_PER_TICK = Math.min(64, LODConfig.LOD_BLOCK_OPS_PER_TICK);
   Logger.tell(source, `Performance mode set to ${mode}. ${getLodStatus()}`);
 }

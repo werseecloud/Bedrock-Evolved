@@ -30,6 +30,7 @@ import {
   handlePerformanceCommand,
   handleVibrantCommand
 } from "../lod/lodManager.js";
+import { handlePerfCommand, setPerfProfile } from "../performance/performanceCommands.js";
 import { handleTerrainUpliftCommand } from "../terrain/commands/terrainCommands.js";
 import { handleCameraCommand } from "../camera/cameraCommands.js";
 import { handleHarvestCommand } from "../harvest/harvestCommands.js";
@@ -86,7 +87,12 @@ function handleScriptEvent(event) {
       return;
     }
     if (id === "wu:performance") {
+      setPerfProfile(source, args[0] || "balanced");
       handlePerformanceCommand(source, args);
+      return;
+    }
+    if (id === "be:perf") {
+      handlePerfCommand(source, args);
       return;
     }
     if (id === "co:camera") {

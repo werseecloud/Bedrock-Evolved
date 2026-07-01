@@ -1,5 +1,6 @@
 import { system } from "@minecraft/server";
 import { TERRAIN_CONFIG } from "./terrainConfig.js";
+import { requestParticles } from "../performance/performanceManager.js";
 
 const lastMessageTick = new Map();
 
@@ -20,11 +21,13 @@ export function runValleyFogPass(player, forced = false) {
     // Optional.
   }
   try {
-    player.dimension.spawnParticle("minecraft:basic_smoke_particle", {
-      x: player.location.x,
-      y: player.location.y + 1.2,
-      z: player.location.z
-    });
+    if (requestParticles("terrain_valley_fog", 1)) {
+      player.dimension.spawnParticle("minecraft:basic_smoke_particle", {
+        x: player.location.x,
+        y: player.location.y + 1.2,
+        z: player.location.z
+      });
+    }
   } catch (_error) {
     // Optional.
   }

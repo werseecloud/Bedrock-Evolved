@@ -1,5 +1,6 @@
 import { system } from "@minecraft/server";
 import { Logger } from "./utils/logger.js";
+import { initPerformanceManager } from "./performance/performanceManager.js";
 import { initStructurePlacer } from "./cities/structurePlacer.js";
 import { initCityRegistry } from "./cities/cityRegistry.js";
 import { initBottomTransition } from "./terrain/bottomTransition.js";
@@ -17,6 +18,7 @@ import { initGuideBook } from "./guide/guideBook.js";
 import { initBedrockEvolvedMinimap } from "./minimap/minimapSettingsModule.js";
 
 system.run(() => {
+  initPerformanceManager();
   initStructurePlacer();
   initCityRegistry();
   initBottomTransition();

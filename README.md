@@ -210,6 +210,40 @@ Another add-on can query or mutate this state through the prepared script events
 - All dimension, block, entity, and structure operations are wrapped defensively because unloaded chunks and missing structures can throw.
 - The `performance`, `balanced`, and `cinematic` modes adjust LOD active-impostor caps, skyline radius, placement rate, and block-operation budgets.
 
+## Central Performance Manager
+
+Bedrock Evolved includes a central performance manager so heavy systems do not all run every tick. Use:
+
+- `/scriptevent be:perf status`
+- `/scriptevent be:perf profile performance`
+- `/scriptevent be:perf profile balanced`
+- `/scriptevent be:perf profile cinematic`
+- `/scriptevent be:perf profile server`
+- `/scriptevent be:perf cleanup`
+- `/scriptevent be:perf debug on`
+- `/scriptevent be:perf debug off`
+
+Profiles:
+
+- `performance`: minimap `9x9` every 30 ticks, LOD max 12 impostors, city active radius 64 blocks, particles 25%, guards cap 4, recommended simulation distance 4 chunks.
+- `balanced`: minimap `13x13` every 15 ticks, LOD max 32 impostors, city active radius 96 blocks, particles 50%, guards cap 8, recommended simulation distance 4-6 chunks.
+- `cinematic`: minimap `17x17` every 10 ticks, LOD max 64 impostors, city active radius 128 blocks, particles 100%, guards cap 12, recommended simulation distance 6 chunks on a strong device/server.
+- `server`: minimap lightweight text mode every 40 ticks, LOD max 8 impostors, city active radius 64 blocks, particles 10%, guards cap 4, recommended simulation distance 4 chunks.
+
+The manager enforces shared budgets: max 64 block operations, 32 entity checks, 1 structure placement per tick, and profile-based structure placements per minute. Repeated module errors put that module in temporary fallback mode instead of spamming failures every tick.
+
+Server/world notes: keep simulation distance modest for heavier worlds, usually 4-6 chunks. Bedrock controls render distance and simulation distance; this add-on does not force real far chunks to tick. It also does not create permanent ticking city centers or ticking areas for cities, because those keep chunks active without players and can become expensive quickly.
+
+Performance systems included:
+
+- Per-player staggered updates for minimap, camera, clumps, death beacons, bottom transition checks, city scans, and LOD.
+- Queue-based structure and block placement.
+- Item cleanup with a valuable-item whitelist.
+- Hostile mob caps near active cities.
+- Inactive city sleep mode that simulates resources as data when no player is nearby.
+- Minimap terrain cache TTL of 600 ticks.
+- Particle caps for death beacons, waterfalls, deep bottom effects, and valley fog.
+
 ## Can This Add-On Really Load 2000+ Chunks?
 
 No, not as real Minecraft chunks. Bedrock controls real render distance, simulation distance, server view distance, and ticking areas through the engine, device, world settings, and server settings. This add-on never tries to force 2000 real loaded, rendered, simulated, or ticking chunks.

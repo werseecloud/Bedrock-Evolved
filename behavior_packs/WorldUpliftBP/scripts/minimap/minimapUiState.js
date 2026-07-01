@@ -1,5 +1,6 @@
 import { system } from "@minecraft/server";
 import { DEFAULT_LAYERS, MINIMAP_UI_CONFIG } from "./minimapConfig.js";
+import { getPerformanceProfileName } from "../performance/performanceManager.js";
 
 const states = new Map();
 
@@ -63,5 +64,9 @@ export function shouldRenderSmallMap(player, intervalTicks) {
 }
 
 export function getProfileSettings(state) {
+  const globalProfile = getPerformanceProfileName();
+  if (MINIMAP_UI_CONFIG.profiles[globalProfile]) {
+    return MINIMAP_UI_CONFIG.profiles[globalProfile];
+  }
   return MINIMAP_UI_CONFIG.profiles[state.profile] || MINIMAP_UI_CONFIG.profiles.balanced;
 }

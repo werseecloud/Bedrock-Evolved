@@ -2,6 +2,7 @@ import { system, world } from "@minecraft/server";
 import { MINIMAP_UI_CONFIG } from "./minimapConfig.js";
 import { renderSmallMinimapText } from "./minimapRenderer.js";
 import { getMinimapState, getProfileSettings, shouldRenderSmallMap } from "./minimapUiState.js";
+import { shouldRunForPlayer } from "../performance/performanceManager.js";
 
 let initialized = false;
 let cleanupAttempts = 0;
@@ -12,14 +13,15 @@ export function initMinimapHudController() {
   }
   initialized = true;
   system.runInterval(cleanupLegacyMinimapScoreboard, 40);
-  system.runInterval(tickMinimapHud, 5);
+  system.runInterval(tickMinimapHud, 10);
 }
 
 function tickMinimapHud() {
   for (const player of world.getPlayers()) {
     const state = getMinimapState(player);
     const profile = getProfileSettings(state);
-    if (!shouldRenderSmallMap(player, profile.updateIntervalTicks || MINIMAP_UI_CONFIG.smallMap.updateIntervalTicks)) {
+    const interval = profile.updateIntervalTicks || MINIMAP_UI_CONFIG.smallMap.updateIntervalTicks;
+    if (!shouldRunForPlayer(player, "minimap", interval, 2) || !shouldRenderSmallMap(player, interval)) {
       continue;
     }
     state.renderMode = "actionbar_text_grid";

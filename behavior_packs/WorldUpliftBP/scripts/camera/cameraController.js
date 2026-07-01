@@ -5,6 +5,7 @@ import { analyzeMovement } from "./movementAnalyzer.js";
 import { computeCameraEffects } from "./cameraEffects.js";
 import { getProfile } from "./cameraProfiles.js";
 import { getSettings, getState, updateSettings } from "./cameraState.js";
+import { isModuleUsable, recordModuleError, shouldRunForPlayer } from "../performance/performanceManager.js";
 
 let initialized = false;
 
@@ -34,8 +35,15 @@ export function enablePlayerCamera(player) {
 }
 
 function updatePlayers() {
+  if (!isModuleUsable("camera")) {
+    return;
+  }
   for (const player of world.getPlayers()) {
-    updatePlayer(player);
+    try {
+      updatePlayer(player);
+    } catch (error) {
+      recordModuleError("camera", error);
+    }
   }
 }
 
@@ -48,7 +56,8 @@ function updatePlayer(player) {
     return;
   }
 
-  if (system.currentTick % Math.max(1, profile.updateIntervalTicks || UPDATE_INTERVAL_TICKS) !== 0) {
+  const interval = Math.max(1, profile.updateIntervalTicks || UPDATE_INTERVAL_TICKS);
+  if (!shouldRunForPlayer(player, "camera", interval, 1)) {
     return;
   }
 

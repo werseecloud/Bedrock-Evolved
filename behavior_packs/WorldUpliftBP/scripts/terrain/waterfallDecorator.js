@@ -3,6 +3,7 @@ import { TERRAIN_STRUCTURE_IDS } from "./featureRegistry.js";
 import { findSurfaceY, getBlockSafe, hasPlayerBuildNearby } from "./utils/blockSafety.js";
 import { queueTerrainBlock, queueTerrainPlatform, queueTerrainStructure } from "./utils/structurePlacement.js";
 import { hashString, mulberry32, randomInt } from "../utils/random.js";
+import { requestParticles } from "../performance/performanceManager.js";
 
 export function runWaterfallPass(player, forced = false) {
   if (!forced && (!TERRAIN_CONFIG.enabled || !TERRAIN_CONFIG.waterfalls.enabled)) {
@@ -66,6 +67,9 @@ function looksLikeDrop(dimension, x, y, z) {
 }
 
 function spawnMist(dimension, location) {
+  if (!requestParticles("terrain_waterfall", 1)) {
+    return;
+  }
   try {
     dimension.spawnParticle("minecraft:basic_smoke_particle", location);
   } catch (_error) {

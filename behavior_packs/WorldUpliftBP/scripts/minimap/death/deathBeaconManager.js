@@ -2,6 +2,7 @@ import { system, world } from "@minecraft/server";
 import { MINIMAP_UI_CONFIG } from "../minimapConfig.js";
 import { distance3D } from "../../utils/vectors.js";
 import { loadMarkerData, saveMarkerData } from "../markers/markerStorage.js";
+import { requestParticles, shouldRunForPlayer } from "../../performance/performanceManager.js";
 
 let initialized = false;
 
@@ -28,6 +29,9 @@ function tickDeathBeacons() {
     return;
   }
   for (const player of world.getPlayers()) {
+    if (!shouldRunForPlayer(player, "death_beacon", MINIMAP_UI_CONFIG.deathBeacon.pulseIntervalTicks, 3)) {
+      continue;
+    }
     const data = loadMarkerData(player);
     const marker = data.latestDeath;
     if (!marker || data.deathBeaconEnabled === false || marker.dimension !== player.dimension.id) {
@@ -44,6 +48,9 @@ function tickDeathBeacons() {
 function spawnDeathBeam(dimension, location, dimensionId) {
   const config = MINIMAP_UI_CONFIG.deathBeacon;
   const count = Math.max(4, Math.min(config.particlesPerPulse, 32));
+  if (!requestParticles("death_beacon", count)) {
+    return;
+  }
   const step = Math.max(2, Math.floor(config.beamHeight / count));
   const particle = String(dimensionId).includes("nether")
     ? "be:death_beacon_nether"

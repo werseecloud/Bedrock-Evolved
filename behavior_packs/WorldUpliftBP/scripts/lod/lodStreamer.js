@@ -7,19 +7,24 @@ import { updateLandmarksForPlayer } from "./landmarkTracker.js";
 
 const lastPlayerChunks = new Map();
 let initialized = false;
+let lastUpdateTick = 0;
 
 export function initLodStreamer() {
   if (initialized) {
     return;
   }
   initialized = true;
-  system.runInterval(updatePlayers, LODConfig.LOD_SCAN_INTERVAL_TICKS);
+  system.runInterval(updatePlayers, 20);
 }
 
 function updatePlayers() {
   if (!LODConfig.LOD_ENABLED) {
     return;
   }
+  if (system.currentTick - lastUpdateTick < LODConfig.LOD_SCAN_INTERVAL_TICKS) {
+    return;
+  }
+  lastUpdateTick = system.currentTick;
 
   for (const player of world.getPlayers()) {
     try {
@@ -52,4 +57,3 @@ function shouldUpdatePlayer(player) {
   lastPlayerChunks.set(player.name, chunk);
   return true;
 }
-

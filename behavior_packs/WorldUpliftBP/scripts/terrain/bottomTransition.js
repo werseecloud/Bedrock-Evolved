@@ -3,6 +3,7 @@ import { MutableConfig, getEffectiveDeepY, setDeepTransitionEnabled } from "../c
 import { Logger } from "../utils/logger.js";
 import { floorVec } from "../utils/vectors.js";
 import { enqueueStructure, queueSimplePlatform } from "../cities/structurePlacer.js";
+import { requestParticles, shouldRunForPlayer } from "../performance/performanceManager.js";
 
 const DEEP_MESSAGE = "The world cracks open beneath you\u2026";
 const warningTicks = new Map();
@@ -28,6 +29,9 @@ function checkPlayers() {
 
   for (const player of world.getPlayers()) {
     try {
+      if (!shouldRunForPlayer(player, "deep_bottom", MutableConfig.PLAYER_SCAN_INTERVAL_TICKS, 4)) {
+        continue;
+      }
       if (!isOverworld(player.dimension)) {
         continue;
       }
@@ -58,7 +62,9 @@ function warnPlayer(player, key) {
     // Effect may be unavailable on older builds.
   }
   try {
-    player.dimension.spawnParticle("minecraft:large_explosion", player.location);
+    if (requestParticles("deep_bottom", 1)) {
+      player.dimension.spawnParticle("minecraft:large_explosion", player.location);
+    }
   } catch (_error) {
     // Particles are best-effort.
   }
@@ -120,7 +126,9 @@ function transitionPlayer(player, key) {
   }
 
   try {
-    nether.spawnParticle("minecraft:large_explosion", target);
+    if (requestParticles("deep_bottom", 1)) {
+      nether.spawnParticle("minecraft:large_explosion", target);
+    }
   } catch (_error) {
     // Best-effort atmosphere.
   }

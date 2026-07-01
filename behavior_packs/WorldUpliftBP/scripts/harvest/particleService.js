@@ -1,4 +1,5 @@
 import { RIGHTCLICK_HARVEST_CONFIG } from "../config.js";
+import { requestParticles } from "../performance/performanceManager.js";
 
 export function playHarvestEffects(player, block) {
   const location = {
@@ -6,7 +7,7 @@ export function playHarvestEffects(player, block) {
     y: block.location.y + 0.6,
     z: block.location.z + 0.5
   };
-  if (RIGHTCLICK_HARVEST_CONFIG.ENABLE_PARTICLES) {
+  if (RIGHTCLICK_HARVEST_CONFIG.ENABLE_PARTICLES && requestParticles("rightclick_harvest", 1)) {
     try {
       block.dimension.spawnParticle("minecraft:crop_growth_emitter", location);
     } catch (_error) {
@@ -40,4 +41,3 @@ export function actionbar(player, message) {
     }
   }
 }
-
