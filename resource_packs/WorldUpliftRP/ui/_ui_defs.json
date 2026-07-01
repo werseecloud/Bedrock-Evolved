@@ -1,0 +1,9 @@
+{
+  "ui_defs": [
+    "ui/be_minimap_hud.json",
+    "ui/be_minimap_settings_button.json",
+    "ui/be_minimap_fullscreen.json",
+    "ui/be_minimap_marker_layers.json",
+    "ui/be_minimap_waypoint_menu.json"
+  ]
+}

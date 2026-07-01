@@ -19,6 +19,7 @@ The optional Vibrant Visuals resource layer targets Bedrock builds that support 
 - Integrated Quality Mechanics: Better Than Mending, safe edge bridging, and XP Clumps with strict scan budgets.
 - Mega-region terrain styling that keeps mountain, valley, forest, and city-plain areas feeling thousands of blocks wide as players explore loaded chunks.
 - First-join World Uplift Guide book with a custom Script UI menu for commands, features, performance notes, and Bedrock limitations.
+- Bedrock Evolved Minimap with settings item, square minimap fallback, fullscreen map forms, waypoints, temporary waypoints, death markers, death beacon particles, layer toggles, and per-player settings.
 
 ## Bedrock Height And World Limit Reality
 
@@ -68,6 +69,35 @@ Use these from chat with cheats enabled:
 - `/scriptevent wu:guide open`
 - `/scriptevent wu:guide book`
 - `/scriptevent wu:guide reset`
+- `/scriptevent be:minimap settings`
+- `/scriptevent be:minimap item`
+- `/scriptevent be:minimap on`
+- `/scriptevent be:minimap off`
+- `/scriptevent be:minimap toggle`
+- `/scriptevent be:minimap fullscreen`
+- `/scriptevent be:minimap close`
+- `/scriptevent be:minimap size small`
+- `/scriptevent be:minimap size normal`
+- `/scriptevent be:minimap size large`
+- `/scriptevent be:minimap position top_right`
+- `/scriptevent be:minimap position top_left`
+- `/scriptevent be:minimap rotate on`
+- `/scriptevent be:minimap rotate off`
+- `/scriptevent be:minimap profile performance`
+- `/scriptevent be:minimap profile balanced`
+- `/scriptevent be:minimap waypoint add Home`
+- `/scriptevent be:minimap waypoint list`
+- `/scriptevent be:minimap waypoint remove Home`
+- `/scriptevent be:minimap temp add Scout`
+- `/scriptevent be:minimap temp clear`
+- `/scriptevent be:minimap death status`
+- `/scriptevent be:minimap death clear`
+- `/scriptevent be:minimap death beacon on`
+- `/scriptevent be:minimap death beacon off`
+- `/scriptevent be:minimap layer deaths on`
+- `/scriptevent be:minimap layer waypoints off`
+- `/scriptevent be:minimap cursor up`
+- `/scriptevent be:minimap cursor place_temp`
 - `/scriptevent wu:deepnether on`
 - `/scriptevent wu:deepnether off`
 - `/scriptevent wu:lod on`
@@ -229,6 +259,60 @@ The guide covers:
 - Honest Bedrock limitations.
 
 If a player loses the book, run `/scriptevent wu:guide book`. To reopen the UI directly, run `/scriptevent wu:guide open`. To test the first-join flow again, run `/scriptevent wu:guide reset`.
+
+## Minimap Settings And Fullscreen Map
+
+Run `/scriptevent be:minimap item` to receive the `Minimap Settings` item. Use the item to open minimap settings. Sneak + use opens the fullscreen map when the minimap is enabled.
+
+Bedrock add-ons do not have the same unrestricted clickable HUD access as Java client mods. This pack includes Resource Pack UI JSON placeholders for a top-right square minimap and fullscreen frame, but the reliable runtime path is script-driven:
+
+- Settings item opens the minimap menu.
+- `/scriptevent be:minimap settings` opens the same menu.
+- The small square minimap uses a budgeted actionbar/text-grid fallback.
+- `/scriptevent be:minimap fullscreen` opens a fullscreen `ActionFormData` map with a larger text-grid, markers, coordinates, compass-style north label, and commands.
+- `/scriptevent be:minimap close` returns to gameplay and resumes the small minimap if enabled.
+
+Minimap settings are stored per player where dynamic properties are available, with memory fallback if storage fails. If minimap is disabled, terrain sampling and marker rendering are skipped for that player.
+
+## Map Markers, Waypoints And Death Beacon
+
+The minimap tracks a latest death marker, death history, permanent waypoints, temporary waypoints, city markers, player markers, and limited entity markers. Waypoints are private by default.
+
+Death marker behavior:
+
+- On player death, the latest death location, dimension, coordinates, and tick time are saved.
+- The latest death marker appears on the minimap/fullscreen map when that layer is enabled.
+- `/scriptevent be:minimap death status` shows distance and dimension state.
+- `/scriptevent be:minimap death clear` clears the latest marker.
+- The death beacon uses particles only by default. It pulses near the saved death location and only when the player is within the configured active radius.
+
+Waypoint behavior:
+
+- `/scriptevent be:minimap waypoint add <name>` creates a permanent waypoint at your current location.
+- `/scriptevent be:minimap temp add <name>` creates a temporary waypoint that expires.
+- The fullscreen map includes Add Waypoint, Add Temporary Waypoint, Waypoint List, cursor movement, layer settings, and center-on-death options.
+- Direct right-click placement on the fullscreen map is not guaranteed in Bedrock. The fallback is cursor/form mode: move the cursor with form buttons or `/scriptevent be:minimap cursor up/down/left/right`, then place a temporary marker with `/scriptevent be:minimap cursor place_temp`.
+
+Layer toggles:
+
+- `deaths`
+- `waypoints`
+- `temp`
+- `players`
+- `mobs`
+- `cities`
+- `landmarks`
+
+Example: `/scriptevent be:minimap layer mobs off`.
+
+Performance notes:
+
+- No minimap work runs for players with minimap disabled.
+- Small map updates are interval-based, not every tick.
+- Fullscreen map uses profile-based grid sizes: `performance`, `balanced`, `cinematic`, and `server`.
+- Entity markers only render on fullscreen map and are capped.
+- Marker caps and clustering reduce spam.
+- Death beacon particles pulse on an interval and only near the death marker.
 
 ## Vibrant Visuals
 

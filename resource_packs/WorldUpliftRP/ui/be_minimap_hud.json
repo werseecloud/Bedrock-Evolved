@@ -1,0 +1,54 @@
+{
+  "namespace": "be_minimap_hud",
+  "minimap_panel": {
+    "type": "panel",
+    "size": [128, 128],
+    "anchor_from": "top_right",
+    "anchor_to": "top_right",
+    "offset": [-12, 12],
+    "controls": [
+      {
+        "background": {
+          "type": "image",
+          "texture": "textures/ui/minimap/minimap_panel_bg",
+          "alpha": 0.82
+        }
+      },
+      {
+        "border": {
+          "type": "image",
+          "texture": "textures/ui/minimap/minimap_panel_border"
+        }
+      },
+      {
+        "player_arrow": {
+          "type": "image",
+          "texture": "textures/ui/minimap/minimap_player_arrow",
+          "size": [12, 12],
+          "anchor_from": "center",
+          "anchor_to": "center"
+        }
+      },
+      {
+        "north": {
+          "type": "image",
+          "texture": "textures/ui/minimap/minimap_north_icon",
+          "size": [10, 10],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [0, 4]
+        }
+      },
+      {
+        "expand": {
+          "type": "image",
+          "texture": "textures/ui/minimap/minimap_expand_icon",
+          "size": [12, 12],
+          "anchor_from": "top_right",
+          "anchor_to": "top_right",
+          "offset": [-4, 4]
+        }
+      }
+    ]
+  }
+}

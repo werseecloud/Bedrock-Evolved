@@ -8,6 +8,7 @@ const PAGES = Object.freeze({
     title: "Overview",
     body: [
       "World Uplift: Cities & Deep Realms upgrades world exploration with bigger-feeling terrain, staged city expansion, deep realm transitions, LOD skyline illusions, camera movement, RightClick Harvest, Better Than Mending, Bridging, and XP Clumps.",
+      "It also includes the Bedrock Evolved Minimap with settings item, fullscreen map, waypoints, death marker, and death beacon fallback controls.",
       "",
       "This add-on stays inside Bedrock limits. It does not force infinite height, real 2000 chunk rendering, or native engine changes."
     ].join("\n")
@@ -71,6 +72,21 @@ const PAGES = Object.freeze({
       "/scriptevent co:camera off"
     ].join("\n")
   },
+  minimap: {
+    title: "Minimap",
+    body: [
+      "Run /scriptevent be:minimap item to get the Minimap Settings item.",
+      "",
+      "Use it to enable the minimap or open fullscreen map. Sneak + use opens fullscreen when enabled.",
+      "",
+      "Useful commands:",
+      "/scriptevent be:minimap settings",
+      "/scriptevent be:minimap on",
+      "/scriptevent be:minimap fullscreen",
+      "/scriptevent be:minimap waypoint add Home",
+      "/scriptevent be:minimap death status"
+    ].join("\n")
+  },
   performance: {
     title: "Performance",
     body: [
@@ -103,6 +119,7 @@ export function showGuideHome(player) {
     .button("Deep Realms")
     .button("Quality Mechanics")
     .button("Camera")
+    .button("Minimap")
     .button("Performance")
     .button("Bedrock Limits");
 
@@ -110,7 +127,7 @@ export function showGuideHome(player) {
     if (response.canceled || response.selection === undefined) {
       return;
     }
-    const pageKeys = ["overview", "terrain", "cities", "deep", "quality", "camera", "performance", "limits"];
+    const pageKeys = ["overview", "terrain", "cities", "deep", "quality", "camera", "minimap", "performance", "limits"];
     const pageKey = pageKeys[response.selection];
     if (pageKey) {
       showGuidePage(player, pageKey);

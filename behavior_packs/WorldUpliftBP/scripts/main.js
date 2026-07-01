@@ -13,6 +13,7 @@ import { initBetterMending } from "./better_mending/betterMendingController.js";
 import { initBridging } from "./bridging/bridgingController.js";
 import { initClumps } from "./clumps/clumpsController.js";
 import { initGuideBook } from "./guide/guideBook.js";
+import { initBedrockEvolvedMinimap } from "./minimap/minimapSettingsModule.js";
 
 system.run(() => {
   initStructurePlacer();
@@ -27,6 +28,7 @@ system.run(() => {
   initBridging();
   initClumps();
   initGuideBook();
+  initBedrockEvolvedMinimap();
   initScriptEvents();
   Logger.info("World Uplift scripts initialized.");
 });

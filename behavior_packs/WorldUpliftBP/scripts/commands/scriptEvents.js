@@ -33,6 +33,7 @@ import {
 import { handleCameraCommand } from "../camera/cameraCommands.js";
 import { handleHarvestCommand } from "../harvest/harvestCommands.js";
 import { handleQualityCommand } from "../quality/qualityCommands.js";
+import { handleMinimapCommand } from "../minimap/commands/minimapCommands.js";
 
 let initialized = false;
 
@@ -93,6 +94,10 @@ function handleScriptEvent(event) {
     }
     if (id.startsWith("qm:")) {
       handleQualityCommand(source, id, args);
+      return;
+    }
+    if (id === "be:minimap") {
+      handleMinimapCommand(source, args);
       return;
     }
     if (id === "wu:get_city_status") {
