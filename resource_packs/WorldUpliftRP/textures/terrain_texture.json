@@ -21,6 +21,30 @@
     },
     "uplift_roof_tiles": {
       "textures": "textures/blocks/uplift_roof_tiles"
+    },
+    "be_granite_cliff": {
+      "textures": "textures/blocks/be_granite_cliff"
+    },
+    "be_snow_rock": {
+      "textures": "textures/blocks/be_snow_rock"
+    },
+    "be_wet_stone": {
+      "textures": "textures/blocks/be_wet_stone"
+    },
+    "be_mossy_valley_stone": {
+      "textures": "textures/blocks/be_mossy_valley_stone"
+    },
+    "be_old_road_stone": {
+      "textures": "textures/blocks/be_old_road_stone"
+    },
+    "be_hot_spring_stone": {
+      "textures": "textures/blocks/be_hot_spring_stone"
+    },
+    "be_coastal_cliff_stone": {
+      "textures": "textures/blocks/be_coastal_cliff_stone"
+    },
+    "be_crater_rock": {
+      "textures": "textures/blocks/be_crater_rock"
     }
   }
 }

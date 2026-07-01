@@ -1,0 +1,8 @@
+{
+  "format_version": "1.21.30",
+  "minecraft:texture_set": {
+    "color": "be_hot_spring_stone",
+    "normal": "be_hot_spring_stone_normal",
+    "metalness_emissive_roughness": "be_hot_spring_stone_mer"
+  }
+}

@@ -48,7 +48,7 @@ export function handleMinimapCommand(source, args) {
   if (action === "center") return handleCenterCommand(player, args.slice(1));
   if (action === "layer") return handleLayerCommand(player, args.slice(1));
   if (action === "status") {
-    return Logger.tell(player, `Minimap enabled=${state.minimapEnabled} fullscreen=${state.fullscreenOpen} size=${state.size} position=${state.position} mode=${state.mode} profile=${state.profile}.`);
+    return Logger.tell(player, `Minimap enabled=${state.minimapEnabled} fullscreen=${state.fullscreenOpen} size=${state.size} position=${state.position} mode=${state.mode} profile=${state.profile} render=${state.renderMode}.`);
   }
 
   Logger.tell(player, "Unknown minimap command.");

@@ -1,0 +1,56 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:biome": {
+    "description": {
+      "identifier": "be:coastal_cliffs"
+    },
+    "components": {
+      "minecraft:climate": {
+        "temperature": 0.62,
+        "downfall": 0.7,
+        "snow_accumulation": [
+          0,
+          0.1
+        ],
+        "ash": 0,
+        "red_spores": 0,
+        "white_ash": 0
+      },
+      "minecraft:overworld_height": {
+        "noise_type": "hills"
+      },
+      "minecraft:surface_parameters": {
+        "sea_floor_depth": 5,
+        "sea_floor_material": "minecraft:sand",
+        "foundation_material": "minecraft:stone",
+        "mid_material": "minecraft:stone",
+        "top_material": "minecraft:gravel",
+        "sea_material": "minecraft:water"
+      },
+      "minecraft:overworld_generation_rules": {
+        "generate_for_climates": [
+          [
+            "ocean",
+            4
+          ],
+          [
+            "lukewarm",
+            3
+          ]
+        ]
+      },
+      "minecraft:fog_appearance": {
+        "fog_identifier": "be:coastal_cliffs_fog"
+      },
+      "minecraft:tags": {
+        "tags": [
+          "overworld",
+          "beach",
+          "cliffs",
+          "be_terrain",
+          "be_coastal_cliffs"
+        ]
+      }
+    }
+  }
+}

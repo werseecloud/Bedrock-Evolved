@@ -5,6 +5,7 @@ import { initCityRegistry } from "./cities/cityRegistry.js";
 import { initBottomTransition } from "./terrain/bottomTransition.js";
 import { initChunkScanner } from "./terrain/chunkScanner.js";
 import { initMegaRegionDecorator } from "./terrain/megaRegionDecorator.js";
+import { initTerrainUpliftModule } from "./terrain/terrainModule.js";
 import { initScriptEvents } from "./commands/scriptEvents.js";
 import { initLodManager } from "./lod/lodManager.js";
 import { initCameraController } from "./camera/cameraController.js";
@@ -21,6 +22,7 @@ system.run(() => {
   initBottomTransition();
   initChunkScanner();
   initMegaRegionDecorator();
+  initTerrainUpliftModule();
   initLodManager();
   initCameraController();
   initRightClickHarvest();

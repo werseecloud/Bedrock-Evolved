@@ -3,13 +3,17 @@ import { gatherMarkersForPlayer } from "./markers/markerRegistry.js";
 import { overlayMarkersOnGrid, renderMarkerList } from "./markers/markerRenderer.js";
 
 export function renderSmallMinimapText(player, state) {
+  return renderSmallMinimapLines(player, state).join("\n");
+}
+
+export function renderSmallMinimapLines(player, state) {
   const grid = renderMapGrid(player, state, "small");
   const markers = gatherMarkersForPlayer(player, "small");
   const withMarkers = overlayMarkersOnGrid(grid, player, state, markers, "small");
   const coordinates = state.showCoordinates
     ? `XYZ ${Math.floor(player.location.x)} ${Math.floor(player.location.y)} ${Math.floor(player.location.z)}`
     : "";
-  return `[Minimap ${state.size} ${state.mode}]\n${withMarkers.join("\n")}\n${coordinates}`;
+  return [`Minimap ${state.size} ${state.mode}`, ...withMarkers, coordinates].filter(Boolean);
 }
 
 export function renderFullscreenMapText(player, state) {

@@ -17,7 +17,76 @@
       "water_surface_transparency": 0.35,
       "water_fog_color": "#4f746d",
       "water_fog_distance": 28
+    },
+    "be:alpine_peaks": {
+      "water_surface_color": "#6f9f91",
+      "water_surface_transparency": 0.45,
+      "water_fog_color": "#4f746d",
+      "water_fog_distance": 24,
+      "fog_identifier": "be:alpine_peaks_fog"
+    },
+    "be:alpine_foothills": {
+      "water_surface_color": "#6f9f91",
+      "water_surface_transparency": 0.45,
+      "water_fog_color": "#4f746d",
+      "water_fog_distance": 24,
+      "fog_identifier": "be:alpine_peaks_fog"
+    },
+    "be:shattered_cliffs": {
+      "water_surface_color": "#6f9f91",
+      "water_surface_transparency": 0.45,
+      "water_fog_color": "#4f746d",
+      "water_fog_distance": 24,
+      "fog_identifier": "be:shattered_cliffs_fog"
+    },
+    "be:deep_valleys": {
+      "water_surface_color": "#6f9f91",
+      "water_surface_transparency": 0.45,
+      "water_fog_color": "#29483e",
+      "water_fog_distance": 14,
+      "fog_identifier": "be:deep_valleys_fog"
+    },
+    "be:old_growth_highlands": {
+      "water_surface_color": "#6f9f91",
+      "water_surface_transparency": 0.45,
+      "water_fog_color": "#4f746d",
+      "water_fog_distance": 24,
+      "fog_identifier": "be:old_growth_highlands_fog"
+    },
+    "be:highland_groves": {
+      "water_surface_color": "#6f9f91",
+      "water_surface_transparency": 0.45,
+      "water_fog_color": "#4f746d",
+      "water_fog_distance": 24,
+      "fog_identifier": "be:old_growth_highlands_fog"
+    },
+    "be:crater_lake": {
+      "water_surface_color": "#6f9f91",
+      "water_surface_transparency": 0.45,
+      "water_fog_color": "#4f746d",
+      "water_fog_distance": 24,
+      "fog_identifier": "be:deep_valleys_fog"
+    },
+    "be:coastal_cliffs": {
+      "water_surface_color": "#7fb6c8",
+      "water_surface_transparency": 0.45,
+      "water_fog_color": "#4f746d",
+      "water_fog_distance": 24,
+      "fog_identifier": "be:coastal_cliffs_fog"
+    },
+    "be:hot_springs": {
+      "water_surface_color": "#8db7a2",
+      "water_surface_transparency": 0.45,
+      "water_fog_color": "#4f746d",
+      "water_fog_distance": 24,
+      "fog_identifier": "be:hot_springs_fog"
+    },
+    "be:forest_edge": {
+      "water_surface_color": "#6f9f91",
+      "water_surface_transparency": 0.45,
+      "water_fog_color": "#4f746d",
+      "water_fog_distance": 24,
+      "fog_identifier": "be:old_growth_highlands_fog"
     }
   }
 }
-

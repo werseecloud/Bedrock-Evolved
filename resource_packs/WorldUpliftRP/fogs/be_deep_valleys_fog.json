@@ -1,0 +1,62 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:fog_settings": {
+    "description": {
+      "identifier": "be:deep_valleys_fog"
+    },
+    "distance": {
+      "air": {
+        "fog_start": 0.02,
+        "fog_end": 0.58,
+        "fog_color": "#4e716d",
+        "render_distance_type": "render"
+      },
+      "water": {
+        "fog_start": 0,
+        "fog_end": 0.32999999999999996,
+        "fog_color": "#284742",
+        "render_distance_type": "render"
+      }
+    },
+    "volumetric": {
+      "density": {
+        "air": {
+          "max_density": 0.08,
+          "max_density_height": 72,
+          "zero_density_height": 240
+        },
+        "water": {
+          "max_density": 0.45,
+          "max_density_height": 16,
+          "zero_density_height": 80
+        }
+      },
+      "media_coefficients": {
+        "air": {
+          "scattering": [
+            0.035,
+            0.06,
+            0.055
+          ],
+          "absorption": [
+            0,
+            0,
+            0
+          ]
+        },
+        "water": {
+          "scattering": [
+            0.02,
+            0.03,
+            0.04
+          ],
+          "absorption": [
+            0.18,
+            0.2,
+            0.22
+          ]
+        }
+      }
+    }
+  }
+}

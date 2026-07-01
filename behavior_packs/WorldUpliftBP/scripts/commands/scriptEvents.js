@@ -30,6 +30,7 @@ import {
   handlePerformanceCommand,
   handleVibrantCommand
 } from "../lod/lodManager.js";
+import { handleTerrainUpliftCommand } from "../terrain/commands/terrainCommands.js";
 import { handleCameraCommand } from "../camera/cameraCommands.js";
 import { handleHarvestCommand } from "../harvest/harvestCommands.js";
 import { handleQualityCommand } from "../quality/qualityCommands.js";
@@ -58,6 +59,10 @@ function handleScriptEvent(event) {
     }
     if (id === "wu:terrain") {
       handleTerrainCommand(source, args);
+      return;
+    }
+    if (id === "be:terrain") {
+      handleTerrainUpliftCommand(source, args);
       return;
     }
     if (id === "wu:regions") {

@@ -1,0 +1,8 @@
+{
+  "format_version": "1.21.30",
+  "minecraft:texture_set": {
+    "color": "be_old_road_stone",
+    "normal": "be_old_road_stone_normal",
+    "metalness_emissive_roughness": "be_old_road_stone_mer"
+  }
+}

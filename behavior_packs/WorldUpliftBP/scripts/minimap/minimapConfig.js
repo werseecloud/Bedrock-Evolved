@@ -1,5 +1,5 @@
 export const MINIMAP_UI_CONFIG = {
-  enabledByDefault: false,
+  enabledByDefault: true,
   defaultPosition: "top_right",
   defaultSize: "normal",
   defaultMode: "rotating",
@@ -9,6 +9,11 @@ export const MINIMAP_UI_CONFIG = {
 
   smallMap: {
     enabled: true,
+    preferSidebar: true,
+    sidebarSinglePlayerOnly: true,
+    sidebarObjective: "be_minimap",
+    sidebarTitle: "BE Minimap",
+    fallbackToActionbar: true,
     width: 128,
     height: 128,
     marginTop: 12,

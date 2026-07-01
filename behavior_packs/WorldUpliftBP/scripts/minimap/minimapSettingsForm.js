@@ -4,6 +4,7 @@ import { VALID_POSITIONS, VALID_PROFILES, VALID_SIZES } from "./minimapConfig.js
 import { getMinimapState, setMinimapState } from "./minimapUiState.js";
 import { saveMinimapSettings } from "./minimapStorage.js";
 import { openFullscreenMap } from "./minimapFullscreenController.js";
+import { clearMinimapSidebar } from "./minimapHudController.js";
 
 export function showMinimapSettingsForm(player) {
   const state = getMinimapState(player);
@@ -93,6 +94,9 @@ export function setMinimapEnabled(player, enabled) {
     smallMapVisible: Boolean(enabled),
     fullscreenOpen: false
   });
+  if (!enabled) {
+    clearMinimapSidebar(player);
+  }
   saveMinimapSettings(player);
   try {
     player.onScreenDisplay.setActionBar(`Minimap ${enabled ? "enabled" : "disabled"}.`);

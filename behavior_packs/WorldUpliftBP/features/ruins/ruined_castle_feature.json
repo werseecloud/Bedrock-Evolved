@@ -1,0 +1,24 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:structure_template_feature": {
+    "description": {
+      "identifier": "be_terrain:ruined_castle_feature"
+    },
+    "structure_name": "ruins:ruined_castle_01",
+    "adjustment_radius": 8,
+    "facing_direction": "random",
+    "constraints": {
+      "grounded": {},
+      "unburied": {},
+      "block_intersection": {
+        "block_allowlist": [
+          "minecraft:air",
+          "minecraft:grass",
+          "minecraft:tallgrass",
+          "minecraft:snow",
+          "minecraft:water"
+        ]
+      }
+    }
+  }
+}

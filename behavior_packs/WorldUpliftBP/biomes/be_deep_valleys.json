@@ -1,0 +1,55 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:biome": {
+    "description": {
+      "identifier": "be:deep_valleys"
+    },
+    "components": {
+      "minecraft:climate": {
+        "temperature": 0.45,
+        "downfall": 0.9,
+        "snow_accumulation": [
+          0,
+          0.1
+        ],
+        "ash": 0,
+        "red_spores": 0,
+        "white_ash": 0
+      },
+      "minecraft:overworld_height": {
+        "noise_type": "default"
+      },
+      "minecraft:surface_parameters": {
+        "sea_floor_depth": 5,
+        "sea_floor_material": "minecraft:gravel",
+        "foundation_material": "minecraft:stone",
+        "mid_material": "minecraft:dirt",
+        "top_material": "minecraft:moss_block",
+        "sea_material": "minecraft:water"
+      },
+      "minecraft:overworld_generation_rules": {
+        "generate_for_climates": [
+          [
+            "medium",
+            5
+          ],
+          [
+            "lukewarm",
+            4
+          ]
+        ]
+      },
+      "minecraft:fog_appearance": {
+        "fog_identifier": "be:deep_valleys_fog"
+      },
+      "minecraft:tags": {
+        "tags": [
+          "overworld",
+          "valley",
+          "be_terrain",
+          "be_deep_valleys"
+        ]
+      }
+    }
+  }
+}

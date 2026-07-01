@@ -1,0 +1,24 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:structure_template_feature": {
+    "description": {
+      "identifier": "be_terrain:floating_cliff_feature"
+    },
+    "structure_name": "terrain:floating_cliff_01",
+    "adjustment_radius": 8,
+    "facing_direction": "random",
+    "constraints": {
+      "grounded": {},
+      "unburied": {},
+      "block_intersection": {
+        "block_allowlist": [
+          "minecraft:air",
+          "minecraft:grass",
+          "minecraft:tallgrass",
+          "minecraft:snow",
+          "minecraft:water"
+        ]
+      }
+    }
+  }
+}

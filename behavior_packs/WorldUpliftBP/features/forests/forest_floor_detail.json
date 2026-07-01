@@ -1,0 +1,12 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:partially_exposed_blob_feature": {
+    "description": {
+      "identifier": "be_terrain:forest_floor_detail"
+    },
+    "places_block": "minecraft:moss_block",
+    "placement_radius_around_floor": 4,
+    "placement_probability_per_valid_position": 0.35,
+    "exposed_face": "up"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "format_version": "1.21.30",
+  "minecraft:texture_set": {
+    "color": "be_mossy_valley_stone",
+    "normal": "be_mossy_valley_stone_normal",
+    "metalness_emissive_roughness": "be_mossy_valley_stone_mer"
+  }
+}

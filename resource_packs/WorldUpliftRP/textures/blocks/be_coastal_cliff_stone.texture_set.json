@@ -1,0 +1,8 @@
+{
+  "format_version": "1.21.30",
+  "minecraft:texture_set": {
+    "color": "be_coastal_cliff_stone",
+    "normal": "be_coastal_cliff_stone_normal",
+    "metalness_emissive_roughness": "be_coastal_cliff_stone_mer"
+  }
+}

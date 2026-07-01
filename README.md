@@ -268,7 +268,8 @@ Bedrock add-ons do not have the same unrestricted clickable HUD access as Java c
 
 - Settings item opens the minimap menu.
 - `/scriptevent be:minimap settings` opens the same menu.
-- The small square minimap uses a budgeted actionbar/text-grid fallback.
+- The small minimap now prefers a right-side scoreboard/sidebar text grid when one player is in the world. This is the closest reliable script-controlled top-right/right-side fallback Bedrock exposes.
+- In multiplayer or on platforms where scoreboard display commands fail, the small minimap falls back to the actionbar/text-grid so it remains visible instead of crashing or leaking one player's map to others.
 - `/scriptevent be:minimap fullscreen` opens a fullscreen `ActionFormData` map with a larger text-grid, markers, coordinates, compass-style north label, and commands.
 - `/scriptevent be:minimap close` returns to gameplay and resumes the small minimap if enabled.
 
@@ -304,6 +305,8 @@ Layer toggles:
 - `landmarks`
 
 Example: `/scriptevent be:minimap layer mobs off`.
+
+Use `/scriptevent be:minimap status` to see the current render path. `render=right_sidebar` means the minimap is being shown on the right side; `render=actionbar_text_grid` means the fallback is active.
 
 Performance notes:
 
@@ -356,6 +359,44 @@ Quality Mechanics is also integrated into this same add-on:
 - Clumps scans XP orbs around players on an interval. Exact mode does not delete XP if the API cannot read the orb value. Approximate mode is opt-in with `/scriptevent qm:clumps approximate on`.
 
 None of these systems scans the whole world. They operate around active players and use cooldowns or scan intervals to keep normal Bedrock devices safe.
+
+## Bedrock Evolved: Terrain Uplift
+
+Terrain Uplift is integrated into this same add-on under the `be_terrain` data namespace and `/scriptevent be:terrain` command namespace. It is terrain-only: biomes, scenic features, waterfalls, snowlines, cave mouths, old roads, coastal cliffs, forest density, rare landmarks, underground ruins, hot springs, and valley ambience.
+
+Commands:
+
+- `/scriptevent be:terrain on`
+- `/scriptevent be:terrain off`
+- `/scriptevent be:terrain status`
+- `/scriptevent be:terrain profile performance`
+- `/scriptevent be:terrain profile balanced`
+- `/scriptevent be:terrain profile cinematic`
+- `/scriptevent be:terrain debug on`
+- `/scriptevent be:terrain debug off`
+- `/scriptevent be:terrain decorate`
+- `/scriptevent be:terrain landmark`
+- `/scriptevent be:terrain snowline`
+- `/scriptevent be:terrain waterfalls`
+
+The module adds custom biome JSON prototypes for alpine peaks, alpine foothills, shattered cliffs, deep valleys, old-growth highlands, highland groves, crater lakes, coastal cliffs, hot springs, and forest edges. It also adds feature and feature-rule JSON for mountain spires, boulders, snowline patches, waterfalls, cave mouths, forest detail, rivers, ruins, coastal cliffs, fantasy floating cliffs, and hot springs.
+
+Bedrock limitation notes:
+
+- Bedrock add-ons cannot fully rewrite the native terrain engine like a Java core mod.
+- True infinite height or guaranteed 1000+ block terrain is not possible from a pure add-on.
+- Existing chunks will not fully regenerate. Script decorators add scenic details only around active players in loaded areas.
+- New unexplored chunks work best for custom biome and feature-rule data.
+
+Performance behavior:
+
+- The module scans only around active players.
+- It uses movement thresholds before rescanning.
+- Block and structure work is queued through strict budgets.
+- Rare landmarks are tracked so they do not spam a region.
+- Missing `.mcstructure` files are logged/skipped or replaced by small fallback block hints.
+
+Structure templates for `terrain:*` and `ruins:*` are documented in `behavior_packs/WorldUpliftBP/structures/terrain/README.md` and `behavior_packs/WorldUpliftBP/structures/ruins/README.md`. Export production versions with Bedrock structure blocks using the listed IDs.
 
 ## Structures
 

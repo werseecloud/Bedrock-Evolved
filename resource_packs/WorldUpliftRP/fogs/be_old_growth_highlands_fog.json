@@ -1,0 +1,62 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:fog_settings": {
+    "description": {
+      "identifier": "be:old_growth_highlands_fog"
+    },
+    "distance": {
+      "air": {
+        "fog_start": 0.08,
+        "fog_end": 0.78,
+        "fog_color": "#b7c79f",
+        "render_distance_type": "render"
+      },
+      "water": {
+        "fog_start": 0,
+        "fog_end": 0.53,
+        "fog_color": "#66806a",
+        "render_distance_type": "render"
+      }
+    },
+    "volumetric": {
+      "density": {
+        "air": {
+          "max_density": 0.08,
+          "max_density_height": 72,
+          "zero_density_height": 240
+        },
+        "water": {
+          "max_density": 0.45,
+          "max_density_height": 16,
+          "zero_density_height": 80
+        }
+      },
+      "media_coefficients": {
+        "air": {
+          "scattering": [
+            0.065,
+            0.08,
+            0.055
+          ],
+          "absorption": [
+            0,
+            0,
+            0
+          ]
+        },
+        "water": {
+          "scattering": [
+            0.02,
+            0.03,
+            0.04
+          ],
+          "absorption": [
+            0.18,
+            0.2,
+            0.22
+          ]
+        }
+      }
+    }
+  }
+}

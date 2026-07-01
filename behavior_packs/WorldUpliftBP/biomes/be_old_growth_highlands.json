@@ -1,0 +1,56 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:biome": {
+    "description": {
+      "identifier": "be:old_growth_highlands"
+    },
+    "components": {
+      "minecraft:climate": {
+        "temperature": 0.5,
+        "downfall": 0.85,
+        "snow_accumulation": [
+          0,
+          0.1
+        ],
+        "ash": 0,
+        "red_spores": 0,
+        "white_ash": 0
+      },
+      "minecraft:overworld_height": {
+        "noise_type": "hills"
+      },
+      "minecraft:surface_parameters": {
+        "sea_floor_depth": 5,
+        "sea_floor_material": "minecraft:gravel",
+        "foundation_material": "minecraft:stone",
+        "mid_material": "minecraft:rooted_dirt",
+        "top_material": "minecraft:podzol",
+        "sea_material": "minecraft:water"
+      },
+      "minecraft:overworld_generation_rules": {
+        "generate_for_climates": [
+          [
+            "medium",
+            6
+          ],
+          [
+            "cold",
+            3
+          ]
+        ]
+      },
+      "minecraft:fog_appearance": {
+        "fog_identifier": "be:old_growth_highlands_fog"
+      },
+      "minecraft:tags": {
+        "tags": [
+          "overworld",
+          "forest",
+          "hills",
+          "be_terrain",
+          "be_old_growth_highlands"
+        ]
+      }
+    }
+  }
+}
