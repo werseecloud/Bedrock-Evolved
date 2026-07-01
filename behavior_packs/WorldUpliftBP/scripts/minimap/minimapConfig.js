@@ -9,10 +9,6 @@ export const MINIMAP_UI_CONFIG = {
 
   smallMap: {
     enabled: true,
-    preferSidebar: true,
-    sidebarSinglePlayerOnly: true,
-    sidebarObjective: "be_minimap",
-    sidebarTitle: "BE Minimap",
     fallbackToActionbar: true,
     width: 128,
     height: 128,

@@ -1,29 +1,25 @@
 import { system, world } from "@minecraft/server";
 import { MINIMAP_UI_CONFIG } from "./minimapConfig.js";
-import { renderSmallMinimapLines, renderSmallMinimapText } from "./minimapRenderer.js";
+import { renderSmallMinimapText } from "./minimapRenderer.js";
 import { getMinimapState, getProfileSettings, shouldRenderSmallMap } from "./minimapUiState.js";
 
 let initialized = false;
-let sidebarActive = false;
+let cleanupAttempts = 0;
 
 export function initMinimapHudController() {
   if (initialized) {
     return;
   }
   initialized = true;
+  system.runInterval(cleanupLegacyMinimapScoreboard, 40);
   system.runInterval(tickMinimapHud, 5);
 }
 
 function tickMinimapHud() {
-  const players = world.getPlayers();
-  for (const player of players) {
+  for (const player of world.getPlayers()) {
     const state = getMinimapState(player);
     const profile = getProfileSettings(state);
     if (!shouldRenderSmallMap(player, profile.updateIntervalTicks || MINIMAP_UI_CONFIG.smallMap.updateIntervalTicks)) {
-      continue;
-    }
-    if (tryRenderSidebar(player, state, players.length)) {
-      state.renderMode = "right_sidebar";
       continue;
     }
     state.renderMode = "actionbar_text_grid";
@@ -39,46 +35,34 @@ function tickMinimapHud() {
   }
 }
 
-function tryRenderSidebar(player, state, playerCount) {
-  const config = MINIMAP_UI_CONFIG.smallMap;
-  if (!config.preferSidebar) {
-    return false;
-  }
-  if (config.sidebarSinglePlayerOnly && playerCount > 1) {
-    if (sidebarActive) {
-      clearSidebar(player);
-      sidebarActive = false;
-    }
-    return false;
-  }
-
-  const objective = config.sidebarObjective || "be_minimap";
-  const title = config.sidebarTitle || "BE Minimap";
-  try {
-    runCommandSafe(player, `scoreboard objectives remove ${objective}`);
-    runCommand(player, `scoreboard objectives add ${objective} dummy "${escapeCommandText(title)}"`);
-    const lines = renderSmallMinimapLines(player, state).slice(0, 15);
-    let score = lines.length + 1;
-    for (let i = 0; i < lines.length; i++) {
-      const line = formatSidebarLine(lines[i], i);
-      runCommand(player, `scoreboard players set "${escapeCommandText(line)}" ${objective} ${score--}`);
-    }
-    runCommand(player, `scoreboard objectives setdisplay sidebar ${objective}`);
-    sidebarActive = true;
-    return true;
-  } catch (_error) {
-    return false;
-  }
-}
-
-function clearSidebar(player) {
-  runCommandSafe(player, `scoreboard objectives setdisplay sidebar`);
-  runCommandSafe(player, `scoreboard objectives remove ${MINIMAP_UI_CONFIG.smallMap.sidebarObjective || "be_minimap"}`);
-}
-
 export function clearMinimapSidebar(player) {
-  clearSidebar(player);
-  sidebarActive = false;
+  removeLegacyObjective(player);
+}
+
+function cleanupLegacyMinimapScoreboard() {
+  if (cleanupAttempts >= 8) {
+    return;
+  }
+  cleanupAttempts++;
+  for (const player of world.getPlayers()) {
+    removeLegacyObjective(player);
+  }
+  if (world.getPlayers().length === 0) {
+    removeLegacyObjectiveFromDimension("minecraft:overworld");
+  }
+}
+
+function removeLegacyObjective(player) {
+  runCommandSafe(player, "scoreboard objectives remove be_minimap");
+}
+
+function removeLegacyObjectiveFromDimension(dimensionId) {
+  try {
+    const dimension = world.getDimension(dimensionId);
+    runCommandOnDimensionSafe(dimension, "scoreboard objectives remove be_minimap");
+  } catch (_error) {
+    // Dimension unavailable during early startup.
+  }
 }
 
 function runCommand(player, command) {
@@ -106,11 +90,14 @@ function runCommandSafe(player, command) {
   }
 }
 
-function formatSidebarLine(line, index) {
-  const text = String(line || "").slice(0, 32);
-  return `${String(index + 1).padStart(2, "0")} ${text}`;
-}
-
-function escapeCommandText(text) {
-  return String(text).replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+function runCommandOnDimensionSafe(dimension, command) {
+  try {
+    if (dimension && typeof dimension.runCommand === "function") {
+      dimension.runCommand(command);
+    } else if (dimension && typeof dimension.runCommandAsync === "function") {
+      dimension.runCommandAsync(command);
+    }
+  } catch (_error) {
+    // Safe cleanup command; ignore failures.
+  }
 }

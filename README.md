@@ -268,8 +268,8 @@ Bedrock add-ons do not have the same unrestricted clickable HUD access as Java c
 
 - Settings item opens the minimap menu.
 - `/scriptevent be:minimap settings` opens the same menu.
-- The small minimap now prefers a right-side scoreboard/sidebar text grid when one player is in the world. This is the closest reliable script-controlled top-right/right-side fallback Bedrock exposes.
-- In multiplayer or on platforms where scoreboard display commands fail, the small minimap falls back to the actionbar/text-grid so it remains visible instead of crashing or leaking one player's map to others.
+- The small minimap does not use the scoreboard/sidebar. The runtime fallback is an actionbar/text-grid map because Bedrock Script API does not expose a reliable per-player dynamic top-right HUD canvas.
+- Resource Pack JSON UI placeholders still define a top-right minimap frame, but scripts cannot safely draw a live map into that frame on every Bedrock platform.
 - `/scriptevent be:minimap fullscreen` opens a fullscreen `ActionFormData` map with a larger text-grid, markers, coordinates, compass-style north label, and commands.
 - `/scriptevent be:minimap close` returns to gameplay and resumes the small minimap if enabled.
 
@@ -306,7 +306,7 @@ Layer toggles:
 
 Example: `/scriptevent be:minimap layer mobs off`.
 
-Use `/scriptevent be:minimap status` to see the current render path. `render=right_sidebar` means the minimap is being shown on the right side; `render=actionbar_text_grid` means the fallback is active.
+Use `/scriptevent be:minimap status` to see the current render path. `render=actionbar_text_grid` means the scoreboard-free fallback is active.
 
 Performance notes:
 
