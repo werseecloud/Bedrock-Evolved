@@ -317,6 +317,38 @@ Performance notes:
 - Marker caps and clustering reduce spam.
 - Death beacon particles pulse on an interval and only near the death marker.
 
+## UI Branding
+
+The Resource Pack includes Bedrock Evolved UI branding as a subtle add-on overlay. It does not replace the official Minecraft logo and does not claim Mojang or Microsoft affiliation.
+
+Logo files:
+
+- `resource_packs/WorldUpliftRP/textures/ui/branding/bedrock_evolved_logo.png`
+- `resource_packs/WorldUpliftRP/textures/ui/branding/bedrock_evolved_logo_small.png`
+- `resource_packs/WorldUpliftRP/textures/ui/branding/bedrock_evolved_logo_wide.png`
+
+UI files:
+
+- `resource_packs/WorldUpliftRP/ui/be_branding_common.json`
+- `resource_packs/WorldUpliftRP/ui/be_loading_screen_branding.json`
+- `resource_packs/WorldUpliftRP/ui/be_world_create_branding.json`
+- `resource_packs/WorldUpliftRP/ui/be_pause_screen_branding.json`
+- `resource_packs/WorldUpliftRP/ui/be_branding_config.json`
+
+The new files are registered in `resource_packs/WorldUpliftRP/ui/_ui_defs.json`. They add a center/upper logo for loading-style progress screens and a small bottom-right badge for the pause menu. The world creation/generation overlay uses the text `Evolving your world...` with a subtle subtitle.
+
+To replace the logo, keep the same file names and use transparent PNGs. Recommended source size is at least `1024 x 360` for the main logo. Keep the background transparent so the logo blends into Bedrock UI screens.
+
+To disable branding, remove these entries from `_ui_defs.json`:
+
+- `ui/be_branding_config.json`
+- `ui/be_branding_common.json`
+- `ui/be_loading_screen_branding.json`
+- `ui/be_world_create_branding.json`
+- `ui/be_pause_screen_branding.json`
+
+Known limitation: Bedrock JSON UI target names can shift between versions, especially as parts of the UI move toward newer systems. These files patch the `progress_screen` and `pause` namespaces with modular `modifications` so a missing target should not break the rest of the pack, but a specific overlay may not appear on every Bedrock build. Back up the pack before editing UI JSON.
+
 ## Vibrant Visuals
 
 The resource pack includes PBR texture sets:

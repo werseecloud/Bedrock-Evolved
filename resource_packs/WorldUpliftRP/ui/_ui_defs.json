@@ -1,5 +1,10 @@
 {
   "ui_defs": [
+    "ui/be_branding_config.json",
+    "ui/be_branding_common.json",
+    "ui/be_loading_screen_branding.json",
+    "ui/be_world_create_branding.json",
+    "ui/be_pause_screen_branding.json",
     "ui/be_minimap_hud.json",
     "ui/be_minimap_settings_button.json",
     "ui/be_minimap_fullscreen.json",

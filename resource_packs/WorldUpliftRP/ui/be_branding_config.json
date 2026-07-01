@@ -1,0 +1,10 @@
+{
+  "namespace": "be_branding_config",
+  "$branding_config_note": "Resource Pack JSON UI cannot be toggled at runtime by the behavior-pack scripts. To disable a placement, remove the matching be_*_branding file from ui/_ui_defs.json or set the inserted control to ignored.",
+  "$show_on_loading_screen": true,
+  "$show_on_world_create_screen": true,
+  "$show_on_pause_menu": true,
+  "$show_on_main_menu": false,
+  "$logo_opacity": 1.0,
+  "$pause_menu_logo_opacity": 0.85
+}

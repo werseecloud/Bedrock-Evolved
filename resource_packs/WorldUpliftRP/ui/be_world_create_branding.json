@@ -1,0 +1,16 @@
+{
+  "namespace": "progress_screen",
+  "world_generation_progress_screen": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "insert_back",
+        "value": [
+          {
+            "be_world_create_logo@be_branding_common.world_create_logo_panel": {}
+          }
+        ]
+      }
+    ]
+  }
+}

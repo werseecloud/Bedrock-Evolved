@@ -1,0 +1,160 @@
+{
+  "namespace": "be_branding_common",
+  "$be_logo_texture": "textures/ui/branding/bedrock_evolved_logo",
+  "$be_logo_small_texture": "textures/ui/branding/bedrock_evolved_logo_small",
+  "$be_logo_wide_texture": "textures/ui/branding/bedrock_evolved_logo_wide",
+  "$be_disclaimer_text": "%ui.bedrock_evolved.disclaimer",
+  "$be_loading_text": "%ui.bedrock_evolved.loading",
+  "$be_loading_subtitle_text": "%ui.bedrock_evolved.loading_subtitle",
+
+  "logo_image": {
+    "type": "image",
+    "texture": "$be_logo_texture",
+    "keep_ratio": true,
+    "size": ["100%", "100%"],
+    "allow_clipping": false
+  },
+
+  "logo_image_small": {
+    "type": "image",
+    "texture": "$be_logo_small_texture",
+    "keep_ratio": true,
+    "size": ["100%", "100%"],
+    "allow_clipping": false
+  },
+
+  "loading_logo_panel": {
+    "type": "panel",
+    "size": [420, 168],
+    "max_size": ["35%", 168],
+    "min_size": [260, 104],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "offset": [0, -90],
+    "alpha": 0.96,
+    "controls": [
+      {
+        "logo@be_branding_common.logo_image": {
+          "size": ["100%", 122],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle"
+        }
+      },
+      {
+        "loading_text": {
+          "type": "label",
+          "text": "$be_loading_text",
+          "size": ["100%", 18],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [0, -24],
+          "font_size": "small",
+          "color": [0.8, 0.95, 0.9],
+          "shadow": true,
+          "text_alignment": "center"
+        }
+      }
+    ]
+  },
+
+  "world_create_logo_panel": {
+    "type": "panel",
+    "size": [430, 190],
+    "max_size": ["36%", 190],
+    "min_size": [260, 120],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "offset": [0, -88],
+    "alpha": 0.98,
+    "controls": [
+      {
+        "logo@be_branding_common.logo_image": {
+          "size": ["100%", 118],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle"
+        }
+      },
+      {
+        "loading_text": {
+          "type": "label",
+          "text": "$be_loading_text",
+          "size": ["100%", 18],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [0, -44],
+          "font_size": "small",
+          "color": [0.84, 1.0, 0.88],
+          "shadow": true,
+          "text_alignment": "center"
+        }
+      },
+      {
+        "loading_subtitle": {
+          "type": "label",
+          "text": "$be_loading_subtitle_text",
+          "size": ["100%", 18],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [0, -22],
+          "font_size": "small",
+          "color": [0.68, 0.82, 0.86],
+          "shadow": true,
+          "text_alignment": "center"
+        }
+      }
+    ]
+  },
+
+  "pause_logo_panel": {
+    "type": "panel",
+    "size": [220, 92],
+    "max_size": ["26%", 92],
+    "min_size": [150, 62],
+    "anchor_from": "bottom_right",
+    "anchor_to": "bottom_right",
+    "offset": [-24, -24],
+    "alpha": 0.85,
+    "controls": [
+      {
+        "logo@be_branding_common.logo_image_small": {
+          "size": ["100%", 58],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle"
+        }
+      },
+      {
+        "disclaimer": {
+          "type": "label",
+          "text": "$be_disclaimer_text",
+          "size": ["100%", 26],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "font_size": "extra_small",
+          "color": [0.62, 0.68, 0.7],
+          "shadow": true,
+          "text_alignment": "center"
+        }
+      }
+    ]
+  },
+
+  "footer_badge_panel": {
+    "type": "panel",
+    "size": [180, 54],
+    "max_size": ["22%", 54],
+    "min_size": [128, 42],
+    "anchor_from": "bottom_right",
+    "anchor_to": "bottom_right",
+    "offset": [-18, -14],
+    "alpha": 0.75,
+    "controls": [
+      {
+        "logo@be_branding_common.logo_image_small": {
+          "size": ["100%", "100%"],
+          "anchor_from": "center",
+          "anchor_to": "center"
+        }
+      }
+    ]
+  }
+}

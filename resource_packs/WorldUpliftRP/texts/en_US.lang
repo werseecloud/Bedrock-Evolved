@@ -74,6 +74,9 @@ ui.minimap.add_waypoint=Add Waypoint
 ui.minimap.performance_profile=Performance Profile
 ui.minimap.size=Minimap Size
 ui.minimap.position=Position
+ui.bedrock_evolved.loading=Evolving your world...
+ui.bedrock_evolved.loading_subtitle=Loading terrain, systems, cities, and survival upgrades.
+ui.bedrock_evolved.disclaimer=Independent add-on project. Not affiliated with Mojang Studios or Microsoft.
 
 biome.be.alpine_peaks.name=Alpine Peaks
 biome.be.alpine_foothills.name=Alpine Foothills

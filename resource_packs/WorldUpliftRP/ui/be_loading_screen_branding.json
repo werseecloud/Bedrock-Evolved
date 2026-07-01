@@ -1,0 +1,16 @@
+{
+  "namespace": "progress_screen",
+  "progress_screen": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "insert_back",
+        "value": [
+          {
+            "be_loading_logo@be_branding_common.loading_logo_panel": {}
+          }
+        ]
+      }
+    ]
+  }
+}

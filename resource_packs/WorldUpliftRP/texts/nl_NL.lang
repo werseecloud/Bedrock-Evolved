@@ -74,6 +74,9 @@ ui.minimap.add_waypoint=Waypoint toevoegen
 ui.minimap.performance_profile=Performance profiel
 ui.minimap.size=Minimap grootte
 ui.minimap.position=Positie
+ui.bedrock_evolved.loading=Je wereld wordt geevolueerd...
+ui.bedrock_evolved.loading_subtitle=Terrain, systemen, steden en survival upgrades worden geladen.
+ui.bedrock_evolved.disclaimer=Onafhankelijk add-on project. Niet verbonden aan Mojang Studios of Microsoft.
 
 biome.be.alpine_peaks.name=Alpentoppen
 biome.be.alpine_foothills.name=Alpenvoetheuvels
