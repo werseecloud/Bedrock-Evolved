@@ -23,7 +23,31 @@ export const TERRAIN_CONFIG = {
     chanceNearCliffs: 0.08,
     createBottomPools: true,
     addWetStone: true,
-    addMistParticles: true
+    addMistParticles: true,
+    mistParticleId: "uplift:waterfall_mist"
+  },
+
+  ambientParticles: {
+    rareFireflies: {
+      enabled: true,
+      particleId: "uplift:rare_firefly",
+      fallbackParticleId: "minecraft:basic_flame_particle",
+      scanIntervalTicks: 80,
+      chancePerScan: 0.16,
+      radius: 28,
+      maxBurstsPerScan: 2
+    },
+    waterfallMist: {
+      enabled: true,
+      particleId: "uplift:waterfall_mist",
+      fallbackParticleId: "minecraft:basic_smoke_particle",
+      scanIntervalTicks: 60,
+      detectionIntervalTicks: 140,
+      radius: 96,
+      detectionRadius: 54,
+      maxAnchors: 384,
+      maxBurstsPerScan: 5
+    }
   },
 
   rivers: {

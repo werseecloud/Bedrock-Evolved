@@ -33,7 +33,7 @@
         ]
       },
       "minecraft:fog_appearance": {
-        "fog_identifier": "uplift:storm_mountain_fog"
+        "fog_identifier": "be:shattered_cliffs_fog"
       },
       "minecraft:tags": {
         "tags": [

@@ -1,9 +1,5 @@
 {
   "resource_pack_name": "WorldUpliftRP",
   "texture_name": "atlas.items",
-  "texture_data": {
-    "minimap_settings_icon": {
-      "textures": "textures/ui/minimap/minimap_settings_icon"
-    }
-  }
+  "texture_data": {}
 }

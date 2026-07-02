@@ -33,7 +33,7 @@
         ]
       },
       "minecraft:fog_appearance": {
-        "fog_identifier": "uplift:alpine_peak_vibrant_fog"
+        "fog_identifier": "be:alpine_peaks_fog"
       },
       "minecraft:tags": {
         "tags": [

@@ -50,11 +50,11 @@ export function setPerfProfile(source, profileName) {
     return false;
   }
   const profile = applyPerformanceProfile(normalized);
-  Logger.tell(source, `Performance profile set to ${profile.name}. minimap=${profile.minimapGrid}x${profile.minimapGrid}@${profile.minimapIntervalTicks}t LOD=${profile.lodImpostors} cityRadius=${profile.cityActiveRadius} sim=${profile.simulationRecommendation}.`);
+  Logger.tell(source, `Performance profile set to ${profile.name}. LOD=${profile.lodImpostors} cityRadius=${profile.cityActiveRadius} builders=3 sim=${profile.simulationRecommendation}.`);
   return true;
 }
 
 export function getPerfSummary() {
   const profile = getPerformanceProfile();
-  return `profile=${profile.name} debug=${isPerformanceDebug()} minimap=${profile.minimapGrid}x${profile.minimapGrid}@${profile.minimapIntervalTicks}t LOD=${profile.lodImpostors}`;
+  return `profile=${profile.name} debug=${isPerformanceDebug()} LOD=${profile.lodImpostors} builders=3`;
 }

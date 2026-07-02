@@ -7,35 +7,35 @@ import { hashString, mulberry32, randomInt } from "../utils/random.js";
 const REGION_STYLES = Object.freeze([
   {
     id: "alpine_peaks",
-    weight: 30,
-    minY: 104,
+    weight: 38,
+    minY: 82,
     surfaceBlocks: ["minecraft:snow", "minecraft:stone", "minecraft:packed_ice"],
     accentBlocks: ["minecraft:deepslate", "minecraft:andesite", "minecraft:calcite"]
   },
   {
     id: "shattered_cliffs",
-    weight: 24,
-    minY: 76,
+    weight: 32,
+    minY: 62,
     surfaceBlocks: ["minecraft:stone", "minecraft:andesite", "minecraft:gravel"],
     accentBlocks: ["minecraft:deepslate", "minecraft:cobblestone", "minecraft:tuff"]
   },
   {
     id: "deep_valleys",
-    weight: 18,
+    weight: 12,
     minY: 52,
     surfaceBlocks: ["minecraft:moss_block", "minecraft:grass_block", "minecraft:water"],
     accentBlocks: ["minecraft:mossy_cobblestone", "minecraft:stone", "minecraft:clay"]
   },
   {
     id: "old_growth_highlands",
-    weight: 18,
-    minY: 70,
+    weight: 14,
+    minY: 64,
     surfaceBlocks: ["minecraft:podzol", "minecraft:moss_block", "minecraft:grass_block"],
     accentBlocks: ["minecraft:spruce_log", "minecraft:spruce_leaves", "minecraft:rooted_dirt"]
   },
   {
     id: "city_plains",
-    weight: 10,
+    weight: 4,
     minY: 58,
     surfaceBlocks: ["minecraft:grass_block", "minecraft:coarse_dirt", "minecraft:gravel"],
     accentBlocks: ["minecraft:cobblestone", "minecraft:stone_bricks", "minecraft:oak_log"]
@@ -150,12 +150,13 @@ function getChunkCandidates(centerChunk, radius, region) {
 
 function decorateChunkByStyle(dimension, chunk, region) {
   const random = mulberry32(hashString(`${dimension.id}:${chunk.x}:${chunk.z}:${region.style.id}`));
-  const passes = Math.max(1, Math.floor(5 * MutableConfig.MEGA_REGION_DECORATION_DENSITY));
+  const mountainBoost = isMountainStyle(region.style.id) ? 3 : 0;
+  const passes = Math.max(1, Math.floor((6 + mountainBoost) * MutableConfig.MEGA_REGION_DECORATION_DENSITY));
 
   for (let i = 0; i < passes; i++) {
     const x = chunk.x * 16 + randomInt(random, 1, 14);
     const z = chunk.z * 16 + randomInt(random, 1, 14);
-    const y = findSurfaceY(dimension, x, z, 96);
+    const y = findSurfaceY(dimension, x, z, isMountainStyle(region.style.id) ? 180 : 96);
     if (y === undefined || y < region.style.minY) {
       continue;
     }
@@ -186,20 +187,23 @@ function decorateAlpine(dimension, location, random) {
   if (!MutableConfig.EXTENDED_MOUNTAIN_DECORATION_ENABLED) {
     return;
   }
-  queueSimplePlatform(dimension, { x: location.x, y: location.y - 1, z: location.z }, randomInt(random, 2, 5), pick(random, ["minecraft:snow", "minecraft:stone"]));
-  const height = randomInt(random, 3, 11);
-  for (let i = 0; i < height; i++) {
-    enqueueSetBlock(dimension, { x: location.x, y: location.y + i, z: location.z }, i > height - 3 ? "minecraft:snow" : pick(random, ["minecraft:stone", "minecraft:andesite", "minecraft:deepslate"]));
+  queueSimplePlatform(dimension, { x: location.x, y: location.y - 1, z: location.z }, randomInt(random, 4, 8), pick(random, ["minecraft:snow", "minecraft:stone", "minecraft:packed_ice"]));
+  queueCraggySpire(dimension, location, random, randomInt(random, 12, 30));
+  if (random() < 0.72) {
+    queueRockRib(dimension, location, random, randomInt(random, 12, 26));
   }
-  if (random() < 0.42) {
-    queueRockRib(dimension, location, random, randomInt(random, 4, 9));
+  if (random() < 0.48) {
+    queueLongMountainRidge(dimension, location, random, randomInt(random, 8, 20));
   }
 }
 
 function decorateCliff(dimension, location, random) {
-  queueRockRib(dimension, location, random, randomInt(random, 5, 14));
-  if (random() < 0.3) {
-    queueSimplePlatform(dimension, { x: location.x, y: location.y - 1, z: location.z }, randomInt(random, 2, 4), "minecraft:gravel");
+  queueRockRib(dimension, location, random, randomInt(random, 14, 32));
+  if (random() < 0.64) {
+    queueLongMountainRidge(dimension, location, random, randomInt(random, 10, 24));
+  }
+  if (random() < 0.42) {
+    queueSimplePlatform(dimension, { x: location.x, y: location.y - 1, z: location.z }, randomInt(random, 4, 7), "minecraft:gravel");
   }
 }
 
@@ -230,10 +234,56 @@ function decorateCityPlain(dimension, location, random) {
 
 function queueRockRib(dimension, location, random, height) {
   const block = pick(random, ["minecraft:stone", "minecraft:andesite", "minecraft:deepslate", "minecraft:tuff"]);
+  const alongX = random() > 0.5;
+  const lean = random() > 0.5 ? 1 : -1;
   for (let y = 0; y < height; y++) {
-    enqueueSetBlock(dimension, { x: location.x, y: location.y + y, z: location.z }, block);
-    if (y % 3 === 0) {
-      enqueueSetBlock(dimension, { x: location.x + 1, y: location.y + y, z: location.z }, block);
+    const lateral = Math.floor(y / 5) * lean;
+    const x = location.x + (alongX ? lateral : 0);
+    const z = location.z + (alongX ? 0 : lateral);
+    enqueueSetBlock(dimension, { x, y: location.y + y, z }, block);
+    if (y % 2 === 0) {
+      enqueueSetBlock(dimension, { x: x + (alongX ? 0 : 1), y: location.y + y, z: z + (alongX ? 1 : 0) }, block);
+    }
+    if (y > height - 5 && random() < 0.4) {
+      enqueueSetBlock(dimension, { x, y: location.y + y + 1, z }, "minecraft:snow");
+    }
+  }
+}
+
+function queueCraggySpire(dimension, location, random, requestedHeight) {
+  const maxY = getDimensionMaxY(dimension);
+  const availableHeight = maxY - location.y - 3;
+  if (availableHeight < 4) {
+    return;
+  }
+  const height = Math.max(4, Math.min(requestedHeight, availableHeight));
+  const coreBlocks = ["minecraft:stone", "minecraft:andesite", "minecraft:deepslate", "minecraft:tuff"];
+  for (let y = 0; y < height; y++) {
+    const taper = y / Math.max(1, height);
+    const radius = taper < 0.28 ? 2 : taper < 0.62 ? 1 : 0;
+    const block = y > height - 5 ? pick(random, ["minecraft:snow", "minecraft:calcite", "minecraft:packed_ice"]) : pick(random, coreBlocks);
+    for (let dx = -radius; dx <= radius; dx++) {
+      for (let dz = -radius; dz <= radius; dz++) {
+        if (Math.abs(dx) + Math.abs(dz) <= radius + 1) {
+          enqueueSetBlock(dimension, { x: location.x + dx, y: location.y + y, z: location.z + dz }, block);
+        }
+      }
+    }
+  }
+  enqueueSetBlock(dimension, { x: location.x, y: location.y + height, z: location.z }, "minecraft:snow");
+}
+
+function queueLongMountainRidge(dimension, location, random, length) {
+  const alongX = random() > 0.5;
+  const direction = random() > 0.5 ? 1 : -1;
+  const block = pick(random, ["minecraft:stone", "minecraft:andesite", "minecraft:deepslate", "minecraft:tuff"]);
+  for (let i = 0; i < length; i++) {
+    const offset = (i - Math.floor(length / 2)) * direction;
+    const x = location.x + (alongX ? offset : randomInt(random, -1, 1));
+    const z = location.z + (alongX ? randomInt(random, -1, 1) : offset);
+    const columnHeight = randomInt(random, 3, 9) + Math.max(0, Math.floor((length - Math.abs(offset)) / 5));
+    for (let y = 0; y < columnHeight; y++) {
+      enqueueSetBlock(dimension, { x, y: location.y + y, z }, y > columnHeight - 3 && random() < 0.35 ? "minecraft:snow" : block);
     }
   }
 }
@@ -307,6 +357,21 @@ function getRegionForLocation(location) {
     regionZ,
     style: weightedPick(random, REGION_STYLES)
   };
+}
+
+function isMountainStyle(styleId) {
+  return styleId === "alpine_peaks" || styleId === "shattered_cliffs";
+}
+
+function getDimensionMaxY(dimension) {
+  try {
+    if (dimension.heightRange && typeof dimension.heightRange.max === "number") {
+      return dimension.heightRange.max - 2;
+    }
+  } catch (_error) {
+    // Use safe default below.
+  }
+  return 318;
 }
 
 function weightedPick(random, entries) {

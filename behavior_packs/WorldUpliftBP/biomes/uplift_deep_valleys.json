@@ -33,7 +33,7 @@
         ]
       },
       "minecraft:fog_appearance": {
-        "fog_identifier": "uplift:deep_valley_vibrant_fog"
+        "fog_identifier": "be:deep_valleys_fog"
       },
       "minecraft:tags": {
         "tags": [

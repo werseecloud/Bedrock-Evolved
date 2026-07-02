@@ -32,7 +32,7 @@
         ]
       },
       "minecraft:fog_appearance": {
-        "fog_identifier": "uplift:warm_city_morning_fog"
+        "fog_identifier": "be:default_realistic_fog"
       },
       "minecraft:tags": {
         "tags": [

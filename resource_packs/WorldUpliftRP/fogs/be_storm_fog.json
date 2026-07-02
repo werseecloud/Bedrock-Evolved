@@ -1,0 +1,46 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:fog_settings": {
+    "description": {
+      "identifier": "be:storm_fog"
+    },
+    "distance": {
+      "air": {
+        "fog_start": 0.28,
+        "fog_end": 0.86,
+        "fog_color": "#82909a",
+        "render_distance_type": "render"
+      },
+      "water": {
+        "fog_start": 0.0,
+        "fog_end": 0.46,
+        "fog_color": "#405964",
+        "render_distance_type": "render"
+      }
+    },
+    "volumetric": {
+      "density": {
+        "air": {
+          "max_density": 0.06,
+          "max_density_height": 80,
+          "zero_density_height": 245
+        },
+        "water": {
+          "max_density": 0.42,
+          "max_density_height": 16,
+          "zero_density_height": 74
+        }
+      },
+      "media_coefficients": {
+        "air": {
+          "scattering": [0.04, 0.048, 0.056],
+          "absorption": [0.0, 0.0, 0.0]
+        },
+        "water": {
+          "scattering": [0.018, 0.03, 0.038],
+          "absorption": [0.16, 0.18, 0.2]
+        }
+      }
+    }
+  }
+}

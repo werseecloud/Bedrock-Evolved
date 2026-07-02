@@ -25,15 +25,15 @@
       ]
     },
     "distribution": {
-      "iterations": 2,
-      "scatter_chance": 4.0,
+      "iterations": 3,
+      "scatter_chance": 9.0,
       "x": {
         "distribution": "uniform",
         "extent": [0, 15]
       },
       "y": {
         "distribution": "uniform",
-        "extent": [112, 320]
+        "extent": [126, 430]
       },
       "z": {
         "distribution": "uniform",

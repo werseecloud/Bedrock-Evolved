@@ -3,8 +3,6 @@ export const PERFORMANCE_PROFILE_NAMES = Object.freeze(["performance", "balanced
 export const PERFORMANCE_PROFILES = Object.freeze({
   performance: {
     name: "performance",
-    minimapGrid: 9,
-    minimapIntervalTicks: 30,
     lodImpostors: 12,
     lodPlacementsPerMinute: 4,
     cityActiveRadius: 64,
@@ -23,8 +21,6 @@ export const PERFORMANCE_PROFILES = Object.freeze({
   },
   balanced: {
     name: "balanced",
-    minimapGrid: 13,
-    minimapIntervalTicks: 15,
     lodImpostors: 32,
     lodPlacementsPerMinute: 10,
     cityActiveRadius: 96,
@@ -43,8 +39,6 @@ export const PERFORMANCE_PROFILES = Object.freeze({
   },
   cinematic: {
     name: "cinematic",
-    minimapGrid: 17,
-    minimapIntervalTicks: 10,
     lodImpostors: 64,
     lodPlacementsPerMinute: 18,
     cityActiveRadius: 128,
@@ -63,8 +57,6 @@ export const PERFORMANCE_PROFILES = Object.freeze({
   },
   server: {
     name: "server",
-    minimapGrid: 7,
-    minimapIntervalTicks: 40,
     lodImpostors: 8,
     lodPlacementsPerMinute: 4,
     cityActiveRadius: 64,

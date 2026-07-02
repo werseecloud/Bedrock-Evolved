@@ -1,0 +1,31 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:fog_settings": {
+    "description": {
+      "identifier": "be:fog_profile_balanced"
+    },
+    "distance": {
+      "air": {
+        "fog_start": 0.54,
+        "fog_end": 1.0,
+        "fog_color": "#c6d0da",
+        "render_distance_type": "render"
+      },
+      "water": {
+        "fog_start": 0.0,
+        "fog_end": 0.66,
+        "fog_color": "#6d8a98",
+        "render_distance_type": "render"
+      }
+    },
+    "volumetric": {
+      "density": {
+        "air": {
+          "max_density": 0.024,
+          "max_density_height": 58,
+          "zero_density_height": 255
+        }
+      }
+    }
+  }
+}

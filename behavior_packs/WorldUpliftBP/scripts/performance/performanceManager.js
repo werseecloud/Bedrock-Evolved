@@ -1,9 +1,9 @@
 import { system, world } from "@minecraft/server";
 import { MutableConfig, CONFIG } from "../config.js";
 import { Logger } from "../utils/logger.js";
-import { MINIMAP_UI_CONFIG } from "../minimap/minimapConfig.js";
 import { setLodPerformanceMode } from "../lod/lodConfig.js";
 import { setTerrainProfile } from "../terrain/terrainConfig.js";
+import { syncFogWithPerformanceProfile } from "../visuals/lodFogSync.js";
 import { PERFORMANCE_PROFILES } from "./performanceProfiles.js";
 
 const VALUABLE_ITEM_TYPES = new Set([
@@ -84,24 +84,15 @@ export function applyPerformanceProfile(profileName) {
   MutableConfig.STRUCTURE_PLACEMENT_BATCH_SIZE = profile.maxStructurePlacementsPerTick;
   MutableConfig.CITY_SCAN_INTERVAL_TICKS = profile.name === "cinematic" ? 120 : profile.name === "server" ? 240 : 180;
   MutableConfig.CITY_BUILD_RADIUS = profile.cityActiveRadius;
-  MutableConfig.MEGA_REGION_DECORATION_DENSITY = profile.name === "cinematic" ? 1 : profile.name === "balanced" ? 0.7 : 0.35;
-  MutableConfig.MEGA_REGION_MAX_CHUNKS_PER_SCAN = profile.name === "cinematic" ? 5 : profile.name === "balanced" ? 3 : 2;
+  MutableConfig.MEGA_REGION_DECORATION_DENSITY = profile.name === "cinematic" ? 1.75 : profile.name === "balanced" ? 1.25 : 0.7;
+  MutableConfig.MEGA_REGION_MAX_CHUNKS_PER_SCAN = profile.name === "cinematic" ? 7 : profile.name === "balanced" ? 5 : 3;
 
   CONFIG.clumps.scanIntervalTicks = profile.clumpsIntervalTicks;
   CONFIG.clumps.maxOrbsPerScan = profile.name === "server" ? 64 : 128;
 
-  MINIMAP_UI_CONFIG.profiles.performance.smallGrid = 9;
-  MINIMAP_UI_CONFIG.profiles.performance.updateIntervalTicks = 30;
-  MINIMAP_UI_CONFIG.profiles.balanced.smallGrid = 13;
-  MINIMAP_UI_CONFIG.profiles.balanced.updateIntervalTicks = 15;
-  MINIMAP_UI_CONFIG.profiles.cinematic.smallGrid = 17;
-  MINIMAP_UI_CONFIG.profiles.cinematic.updateIntervalTicks = 10;
-  MINIMAP_UI_CONFIG.profiles.server.smallGrid = 7;
-  MINIMAP_UI_CONFIG.profiles.server.updateIntervalTicks = 40;
-  MINIMAP_UI_CONFIG.deathBeacon.particlesPerPulse = Math.max(4, Math.floor(24 * profile.particleScale));
-
   setLodPerformanceMode(profile.name);
   setTerrainProfile(profile.terrainProfile);
+  syncFogWithPerformanceProfile(profile.name);
   return profile;
 }
 
@@ -211,7 +202,6 @@ export function getPerformanceStatus(extra = {}) {
     `budget(block/entity/structure/particles)=${budgets.blockOps}/${budgets.entityChecks}/${budgets.structures}/${budgets.particles}`,
     `max=${profile.maxBlockOpsPerTick}/${profile.maxEntityChecksPerTick}/${profile.maxStructurePlacementsPerTick}`,
     `structuresMinute=${budgets.structuresThisMinute}/${profile.lodPlacementsPerMinute}`,
-    `minimap=${profile.minimapGrid}x${profile.minimapGrid}@${profile.minimapIntervalTicks}t`,
     `lodImpostors=${profile.lodImpostors}`,
     `cityRadius=${profile.cityActiveRadius}`,
     `guardsCap=${profile.guardsPerCity}`,

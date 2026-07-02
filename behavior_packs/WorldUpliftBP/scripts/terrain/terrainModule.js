@@ -1,4 +1,5 @@
 import { Logger } from "../utils/logger.js";
+import { initAmbientParticleController } from "./ambientParticleController.js";
 import { initLandmarkRegistry } from "./landmarkRegistry.js";
 import { initPostGenerationDecorators } from "./postGenDecorator.js";
 import { TERRAIN_CONFIG } from "./terrainConfig.js";
@@ -12,6 +13,7 @@ export function initTerrainUpliftModule() {
   initialized = true;
   initLandmarkRegistry();
   initPostGenerationDecorators();
+  initAmbientParticleController();
   Logger.info(`Terrain Uplift module initialized profile=${TERRAIN_CONFIG.performanceProfile}.`);
 }
 

@@ -69,7 +69,7 @@ export function showNearestCityStatus(player) {
   return city;
 }
 
-export function scheduleCityStage(city, stage, source) {
+export function scheduleCityStage(city, stage, source, options = {}) {
   const dimension = getDimensionForCity(city);
   const placements = getStagePlacements(city, stage);
 
@@ -104,7 +104,9 @@ export function scheduleCityStage(city, stage, source) {
   city.stage = Math.max(Number(city.stage || 0), stage);
   city.updatedTick = Date.now();
   updateCity(city);
-  Logger.tell(source, `Queued ${city.name} stage ${stage} with ${placements.length} structure placements.`);
+  if (!options.silent) {
+    Logger.tell(source, `Queued ${city.name} stage ${stage} with ${placements.length} structure placements.`);
+  }
 }
 
 function getDimensionForCity(city) {

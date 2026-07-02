@@ -83,6 +83,14 @@ export function createCity(anchor, type = "small_town") {
       wood: 15,
       iron: 0
     },
+    builderState: {
+      version: 1,
+      harvestedCrops: 0,
+      gatheredResources: 0,
+      placedBlocks: 0,
+      completedDetails: 0,
+      lastWorkTick: 0
+    },
     guards: 0,
     createdTick: anchor.createdTick || 0,
     updatedTick: anchor.createdTick || 0

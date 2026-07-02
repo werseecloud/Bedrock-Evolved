@@ -12,11 +12,11 @@ export const DEFAULT_CONFIG = Object.freeze({
   CITY_BUILD_RADIUS: 70,
   CITY_AUTO_REGISTER_ENABLED: true,
   MEGA_REGIONS_ENABLED: true,
-  MEGA_REGION_SIZE_BLOCKS: 3072,
-  MEGA_REGION_SCAN_INTERVAL_TICKS: 80,
-  MEGA_REGION_CHUNK_RADIUS: 4,
-  MEGA_REGION_MAX_CHUNKS_PER_SCAN: 5,
-  MEGA_REGION_DECORATION_DENSITY: 1,
+  MEGA_REGION_SIZE_BLOCKS: 10000,
+  MEGA_REGION_SCAN_INTERVAL_TICKS: 60,
+  MEGA_REGION_CHUNK_RADIUS: 6,
+  MEGA_REGION_MAX_CHUNKS_PER_SCAN: 7,
+  MEGA_REGION_DECORATION_DENSITY: 1.5,
   EXTENDED_MOUNTAIN_DECORATION_ENABLED: true,
   DEBUG: false
 });
@@ -146,6 +146,55 @@ export const CONFIG = {
     useParticles: true,
     ignoreRecentlySpawnedTicks: 10,
     debug: false
+  },
+  worldEdit: {
+    enabled: true,
+    requireAdmin: true,
+    axeItemId: "minecraft:wooden_axe",
+    axeName: "WorldEdit Axe",
+    maxBlocksPerCommand: 32768,
+    maxUndoBlocks: 32768,
+    blocksPerTick: 64,
+    showParticles: true
+  },
+  qol: {
+    autoTorchRefill: {
+      enabled: true,
+      scanIntervalTicks: 5,
+      torchIds: [
+        "minecraft:torch",
+        "minecraft:soul_torch",
+        "minecraft:redstone_torch"
+      ]
+    },
+    treeCapitator: {
+      enabled: true,
+      maxLogs: 96,
+      logsPerTick: 16,
+      durabilityCostPerLog: 1,
+      dropLogs: true
+    },
+    quickStack: {
+      enabled: true,
+      scanIntervalTicks: 100,
+      radius: 6,
+      verticalRadius: 2,
+      maxMovedStacksPerPass: 32,
+      includeHotbar: false,
+      containerBlockIds: [
+        "minecraft:chest",
+        "minecraft:trapped_chest",
+        "minecraft:barrel"
+      ]
+    },
+    deathCoordinates: {
+      enabled: true,
+      trackIntervalTicks: 5
+    },
+    biomeEnterMessage: {
+      enabled: true,
+      scanIntervalTicks: 40
+    }
   },
   permissions: {
     requireTags: false,

@@ -1,4 +1,5 @@
 import { Logger } from "../../utils/logger.js";
+import { getAmbientParticleStatus } from "../ambientParticleController.js";
 import { runSnowlinePass } from "../snowlineDecorator.js";
 import { runWaterfallPass } from "../waterfallDecorator.js";
 import { tryGenerateLandmarkNearPlayer } from "../landmarkTracker.js";
@@ -85,7 +86,8 @@ function formatStatus() {
     `landmarks=${getLandmarkCount()}`,
     `queuedOps=${budget.decorationsQueued}`,
     `skippedOps=${budget.decorationsSkipped}`,
-    `scanRadiusChunks=${TERRAIN_CONFIG.budget.playerScanRadiusChunks}`
+    `scanRadiusChunks=${TERRAIN_CONFIG.budget.playerScanRadiusChunks}`,
+    getAmbientParticleStatus()
   ].join(" | ");
 }
 

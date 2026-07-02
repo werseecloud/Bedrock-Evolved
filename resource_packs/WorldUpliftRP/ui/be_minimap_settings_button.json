@@ -1,9 +1,0 @@
-{
-  "namespace": "be_minimap_settings_button",
-  "settings_button": {
-    "type": "image",
-    "texture": "textures/ui/minimap/minimap_settings_icon",
-    "size": [18, 18],
-    "alpha": 0.9
-  }
-}

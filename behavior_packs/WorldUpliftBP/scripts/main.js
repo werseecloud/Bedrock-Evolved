@@ -15,7 +15,10 @@ import { initBetterMending } from "./better_mending/betterMendingController.js";
 import { initBridging } from "./bridging/bridgingController.js";
 import { initClumps } from "./clumps/clumpsController.js";
 import { initGuideBook } from "./guide/guideBook.js";
-import { initBedrockEvolvedMinimap } from "./minimap/minimapSettingsModule.js";
+import { initCityBuilderController } from "./cities/cityBuilderController.js";
+import { initWorldEditController } from "./worldedit/worldEditController.js";
+import { initQolController } from "./qol/qolController.js";
+import { initFogController } from "./visuals/fogController.js";
 
 system.run(() => {
   initPerformanceManager();
@@ -32,7 +35,10 @@ system.run(() => {
   initBridging();
   initClumps();
   initGuideBook();
-  initBedrockEvolvedMinimap();
+  initCityBuilderController();
+  initWorldEditController();
+  initQolController();
+  initFogController();
   initScriptEvents();
   Logger.info("World Uplift scripts initialized.");
 });

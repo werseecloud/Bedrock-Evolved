@@ -4,6 +4,7 @@ import { findSurfaceY, getBlockSafe, hasPlayerBuildNearby } from "./utils/blockS
 import { queueTerrainBlock, queueTerrainPlatform, queueTerrainStructure } from "./utils/structurePlacement.js";
 import { hashString, mulberry32, randomInt } from "../utils/random.js";
 import { requestParticles } from "../performance/performanceManager.js";
+import { registerWaterfallMistAnchor } from "./ambientParticleController.js";
 
 export function runWaterfallPass(player, forced = false) {
   if (!forced && (!TERRAIN_CONFIG.enabled || !TERRAIN_CONFIG.waterfalls.enabled)) {
@@ -41,7 +42,9 @@ export function runWaterfallPass(player, forced = false) {
       queueTerrainPlatform(player.dimension, { x, y: y - 1, z }, 3, "minecraft:stone");
     });
     if (TERRAIN_CONFIG.waterfalls.addMistParticles) {
-      spawnMist(player.dimension, { x, y: y - 4, z });
+      const mistLocation = { x, y: y - 4, z };
+      registerWaterfallMistAnchor(player.dimension, mistLocation);
+      spawnMist(player.dimension, mistLocation);
     }
     placed++;
   }
@@ -71,9 +74,13 @@ function spawnMist(dimension, location) {
     return;
   }
   try {
-    dimension.spawnParticle("minecraft:basic_smoke_particle", location);
+    dimension.spawnParticle(TERRAIN_CONFIG.waterfalls.mistParticleId || "uplift:waterfall_mist", location);
   } catch (_error) {
-    // Particles are optional.
+    try {
+      dimension.spawnParticle("minecraft:basic_smoke_particle", location);
+    } catch (_fallbackError) {
+      // Particles are optional.
+    }
   }
 }
 

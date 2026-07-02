@@ -36,7 +36,7 @@ function scanLoadedPlayerAreas() {
     }
 
     try {
-      const anchor = detectVillageAnchor(player, 10);
+      const anchor = detectVillageAnchor(player, MutableConfig.CITY_SCAN_RADIUS);
       if (!anchor) {
         continue;
       }

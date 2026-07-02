@@ -1,6 +1,6 @@
 # Bedrock Evolved: World Uplift
 
-Bedrock Evolved: World Uplift is a Minecraft Bedrock Edition add-on prototype for 1.21.80+ that combines data-driven biome/worldgen content with Script API systems for scenic terrain decoration, city-village expansion, and a deep-overworld transition into the Nether.
+Bedrock Evolved: World Uplift is a Minecraft Bedrock Edition add-on prototype with a 1.21.80+ behavior pack and a 1.21.120+ Vibrant Visuals resource pack. It combines data-driven biome/worldgen content with Script API systems for scenic terrain decoration, city-village expansion, and a deep-overworld transition into the Nether.
 
 The optional Vibrant Visuals resource layer targets Bedrock builds that support PBR texture sets. Current Microsoft documentation requires the `pbr` capability and `min_engine_version` `1.21.120` or newer for Vibrant Visuals PBR packs. The core behavior pack remains conservative, but the resource pack is authored for that newer visual pipeline where available.
 
@@ -12,14 +12,18 @@ The optional Vibrant Visuals resource layer targets Bedrock builds that support 
 - Scripted city-village upgrades with staged roads, districts, walls, farms, markets, warehouses, barracks, mines, and town halls.
 - A bottom-transition system that turns deep-overworld falling into a Nether transition instead of pretending Bedrock's world bottom can be removed.
 - Resource pack fog, localization, and placeholder sound/texture definitions.
+- Realistic Fog Rework with lighter biome-specific fog, long-range visibility, and LOD-friendly haze profiles.
 - Vibrant Visuals-oriented PBR material sets for cliffs, snow rock, wet stone, roads, old bricks, and roof tiles.
 - A budgeted LOD illusion system that places distant mountain and city skyline impostors without trying to load or tick impossible chunk counts.
 - Integrated Camera Overhaul controls for subtle movement sway, sprint movement feedback, strafe tilt illusion, crouch dip, and landing bounce, without zooming the camera.
 - Integrated RightClick Harvest for mature crops with transactional seed consume/replant/drop handling.
 - Integrated Quality Mechanics: Better Than Mending, safe edge bridging, and XP Clumps with strict scan budgets.
-- Mega-region terrain styling that keeps mountain, valley, forest, and city-plain areas feeling thousands of blocks wide as players explore loaded chunks.
+- Integrated WorldEdit-style tools with a WorldEdit Axe, pos1/pos2 selection, set, replace, walls, outline, clear, and undo.
+- Survival QoL helpers: Auto Torch Refill, Tree Capitator Lite, Quick Stack Nearby Chests, private death coordinates, and custom-biome enter messages.
+- Mega-region terrain styling that keeps mountain, valley, forest, and city-plain areas feeling about 10,000 x 10,000 blocks wide as players explore loaded chunks.
+- Rare ambient fireflies in forest-like areas at night and soft mist particles around custom waterfalls.
 - First-join World Uplift Guide book with a custom Script UI menu for commands, features, performance notes, and Bedrock limitations.
-- Bedrock Evolved Minimap with settings item, square minimap fallback, fullscreen map forms, waypoints, temporary waypoints, death markers, death beacon particles, layer toggles, and per-player settings.
+- Builder villagers for loaded village-like areas: 3 visible Builder villagers spawn per registered village, harvest crops, gather resources, and keep building city stages/details over time.
 
 ## Bedrock Height And World Limit Reality
 
@@ -38,7 +42,7 @@ If a Bedrock build rejects the high dimension bounds, remove or edit `behavior_p
 
 ## Install
 
-1. Import `WorldUplift_Cities_Deep_Realms.mcaddon` into Minecraft Bedrock Edition.
+1. Import `Bedrock_Evolved.mcaddon` into Minecraft Bedrock Edition.
 2. Enable both packs:
    - Behavior Pack: `World Uplift BP`
    - Resource Pack: `World Uplift RP`
@@ -52,7 +56,7 @@ Always test on a backup world first. Height-bound experiments and void slicing c
 
 ## Commands
 
-Use these from chat with cheats enabled:
+Use these from chat with cheats enabled. Script commands now always answer with a success, processed, or failure message.
 
 - `/scriptevent wu:city create`
 - `/scriptevent wu:city status`
@@ -69,35 +73,20 @@ Use these from chat with cheats enabled:
 - `/scriptevent wu:guide open`
 - `/scriptevent wu:guide book`
 - `/scriptevent wu:guide reset`
-- `/scriptevent be:minimap settings`
-- `/scriptevent be:minimap item`
-- `/scriptevent be:minimap on`
-- `/scriptevent be:minimap off`
-- `/scriptevent be:minimap toggle`
-- `/scriptevent be:minimap fullscreen`
-- `/scriptevent be:minimap close`
-- `/scriptevent be:minimap size small`
-- `/scriptevent be:minimap size normal`
-- `/scriptevent be:minimap size large`
-- `/scriptevent be:minimap position top_right`
-- `/scriptevent be:minimap position top_left`
-- `/scriptevent be:minimap rotate on`
-- `/scriptevent be:minimap rotate off`
-- `/scriptevent be:minimap profile performance`
-- `/scriptevent be:minimap profile balanced`
-- `/scriptevent be:minimap waypoint add Home`
-- `/scriptevent be:minimap waypoint list`
-- `/scriptevent be:minimap waypoint remove Home`
-- `/scriptevent be:minimap temp add Scout`
-- `/scriptevent be:minimap temp clear`
-- `/scriptevent be:minimap death status`
-- `/scriptevent be:minimap death clear`
-- `/scriptevent be:minimap death beacon on`
-- `/scriptevent be:minimap death beacon off`
-- `/scriptevent be:minimap layer deaths on`
-- `/scriptevent be:minimap layer waypoints off`
-- `/scriptevent be:minimap cursor up`
-- `/scriptevent be:minimap cursor place_temp`
+- `/scriptevent worldedit:help`
+- `/scriptevent worldedit:wand`
+- `/scriptevent worldedit:pos1`
+- `/scriptevent worldedit:pos2`
+- `/scriptevent worldedit:set stone`
+- `/scriptevent worldedit:replace dirt stone`
+- `/scriptevent worldedit:walls oak_planks`
+- `/scriptevent worldedit:outline glass`
+- `/scriptevent worldedit:clear`
+- `/scriptevent worldedit:undo`
+- `/scriptevent qol:status`
+- `/scriptevent qol:quick_stack`
+- `/scriptevent qol:on all`
+- `/scriptevent qol:off quick_stack`
 - `/scriptevent wu:deepnether on`
 - `/scriptevent wu:deepnether off`
 - `/scriptevent wu:lod on`
@@ -112,6 +101,18 @@ Use these from chat with cheats enabled:
 - `/scriptevent wu:performance performance`
 - `/scriptevent wu:performance balanced`
 - `/scriptevent wu:performance cinematic`
+- `/scriptevent be:fog on`
+- `/scriptevent be:fog off`
+- `/scriptevent be:fog status`
+- `/scriptevent be:fog profile performance`
+- `/scriptevent be:fog profile balanced`
+- `/scriptevent be:fog profile cinematic`
+- `/scriptevent be:fog profile server`
+- `/scriptevent be:fog biome default`
+- `/scriptevent be:fog biome valley`
+- `/scriptevent be:fog biome alpine`
+- `/scriptevent be:fog debug on`
+- `/scriptevent be:fog debug off`
 - `/scriptevent co:camera on`
 - `/scriptevent co:camera off`
 - `/scriptevent co:camera status`
@@ -170,6 +171,30 @@ Integration events prepared for a Village Politics add-on:
 - `/scriptevent wu:raise_city_guard <cityId> <amount>`
 - `/scriptevent wu:assign_city_role <cityId> <role> <entityId>`
 
+## Survival QoL
+
+- Auto Torch Refill moves replacement torches from inventory into a hotbar slot that just ran out.
+- Tree Capitator Lite chops connected logs when you sneak-break a log with an axe. It drops logs and damages the axe per chopped log.
+- Quick Stack Nearby Chests periodically moves non-hotbar inventory stacks into nearby chests/barrels that already contain the same item. Run `/scriptevent qol:quick_stack` to trigger it manually.
+- Death Coordinates Message sends your death location privately when you die, with a respawn fallback if the death event is not available.
+- Biome Enter Message announces custom World Uplift biomes such as `Entering Alpine Peaks.` when the runtime exposes biome lookup.
+
+Use `/scriptevent qol:status` to inspect toggles. Use `/scriptevent qol:on <feature>` or `/scriptevent qol:off <feature>` with `all`, `torches`, `trees`, `quick_stack`, `death_coords`, or `biomes`.
+
+## WorldEdit Tools
+
+Run `/scriptevent worldedit:wand` to get a named `WorldEdit Axe`.
+
+- Break a block with the axe to set `pos1`.
+- Use the axe on a block to set `pos2`.
+- Run `/scriptevent worldedit:set <block>` to fill the selection.
+- Run `/scriptevent worldedit:replace <from> <to>` to replace one block type.
+- Run `/scriptevent worldedit:walls <block>` or `/scriptevent worldedit:outline <block>` for shell-style edits.
+- Run `/scriptevent worldedit:clear` to set the selection to air.
+- Run `/scriptevent worldedit:undo` to restore the last edit snapshot.
+
+For Bedrock Script API compatibility this pack exposes the command namespace through `/scriptevent worldedit:*` and `/scriptevent we:*`. The editor queues block changes over multiple ticks, caps selections at 32768 blocks, and sends a final success/failure summary when each job finishes.
+
 ## City Generation Stages
 
 Cities generate in small queued stages:
@@ -181,6 +206,19 @@ Cities generate in small queued stages:
 5. Barracks and mine entrance.
 
 The scripts scan loaded areas around players on a long interval and register village-like anchors using bells, beds, and villagers. Structure placement is queued and checks for non-natural blocks before writing, so it avoids obvious player builds and does not place thousands of blocks in one tick.
+
+## Builder Villagers
+
+Every loaded registered village keeps 3 visible Builder villagers near the town center. They are vanilla villager entities tagged and named as Builders for reliable Bedrock compatibility.
+
+Builders cycle between harvesting and building:
+
+- Harvest mature crops in or near the village, replant them, and add food to the city registry.
+- Gather wood, stone, food, and occasional iron when the next build needs resources.
+- Spend stored resources to queue the next city stage.
+- Keep placing small detail projects such as road repairs, lamp posts, garden patches, frames, and market crates after major city stages are done.
+
+Builders only tick while a player has the village loaded. The city registry persists their resources and work counters, so returning to a previously loaded village resumes the builder loop.
 
 ## Village Politics Integration
 
@@ -195,6 +233,7 @@ Generated city metadata is saved in a world dynamic property under `wu:city_regi
 - `districts`
 - `populationEstimate`
 - `resources`
+- `builderState`
 - `guards`
 
 Another add-on can query or mutate this state through the prepared script events listed above. For tighter integration later, mirror those events or import compatible helper logic from `scripts/cities/cityRegistry.js`.
@@ -203,12 +242,13 @@ Another add-on can query or mutate this state through the prepared script events
 
 - Player bottom checks run every 20 ticks by default.
 - City scans run every 200 ticks by default.
-- Mega-region terrain styling runs every 80 ticks by default and decorates only a few loaded chunk areas per scan.
+- Mega-region terrain styling runs every 60 ticks by default and decorates only a few loaded chunk areas per scan.
 - LOD player checks run every 40 ticks by default and only update after meaningful player chunk movement.
 - Structure and block placement are queued.
 - The default max direct block operations per tick is intentionally low.
 - All dimension, block, entity, and structure operations are wrapped defensively because unloaded chunks and missing structures can throw.
 - The `performance`, `balanced`, and `cinematic` modes adjust LOD active-impostor caps, skyline radius, placement rate, and block-operation budgets.
+- Fog profiles sync with performance modes: performance adds slightly more distance blending, balanced stays natural, cinematic keeps the clearest horizon, and server uses a moderate safe profile.
 
 ## Central Performance Manager
 
@@ -225,10 +265,10 @@ Bedrock Evolved includes a central performance manager so heavy systems do not a
 
 Profiles:
 
-- `performance`: minimap `9x9` every 30 ticks, LOD max 12 impostors, city active radius 64 blocks, particles 25%, guards cap 4, recommended simulation distance 4 chunks.
-- `balanced`: minimap `13x13` every 15 ticks, LOD max 32 impostors, city active radius 96 blocks, particles 50%, guards cap 8, recommended simulation distance 4-6 chunks.
-- `cinematic`: minimap `17x17` every 10 ticks, LOD max 64 impostors, city active radius 128 blocks, particles 100%, guards cap 12, recommended simulation distance 6 chunks on a strong device/server.
-- `server`: minimap lightweight text mode every 40 ticks, LOD max 8 impostors, city active radius 64 blocks, particles 10%, guards cap 4, recommended simulation distance 4 chunks.
+- `performance`: LOD max 12 impostors, city active radius 64 blocks, particles 25%, guards cap 4, builders cap 3, recommended simulation distance 4 chunks.
+- `balanced`: LOD max 32 impostors, city active radius 96 blocks, particles 50%, guards cap 8, builders cap 3, recommended simulation distance 4-6 chunks.
+- `cinematic`: LOD max 64 impostors, city active radius 128 blocks, particles 100%, guards cap 12, builders cap 3, recommended simulation distance 6 chunks on a strong device/server.
+- `server`: LOD max 8 impostors, city active radius 64 blocks, particles 10%, guards cap 4, builders cap 3, recommended simulation distance 4 chunks.
 
 The manager enforces shared budgets: max 64 block operations, 32 entity checks, 1 structure placement per tick, and profile-based structure placements per minute. Repeated module errors put that module in temporary fallback mode instead of spamming failures every tick.
 
@@ -236,13 +276,13 @@ Server/world notes: keep simulation distance modest for heavier worlds, usually 
 
 Performance systems included:
 
-- Per-player staggered updates for minimap, camera, clumps, death beacons, bottom transition checks, city scans, and LOD.
+- Per-player staggered updates for camera, clumps, bottom transition checks, city scans, builder villagers, and LOD.
 - Queue-based structure and block placement.
 - Item cleanup with a valuable-item whitelist.
 - Hostile mob caps near active cities.
 - Inactive city sleep mode that simulates resources as data when no player is nearby.
-- Minimap terrain cache TTL of 600 ticks.
-- Particle caps for death beacons, waterfalls, deep bottom effects, and valley fog.
+- Particle caps for builder work, rare fireflies, waterfalls, deep bottom effects, and valley fog.
+- LOD-aware fog profiles that blend far silhouettes without hiding them.
 
 ## Can This Add-On Really Load 2000+ Chunks?
 
@@ -270,14 +310,36 @@ When a fake landmark becomes close enough, the script marks it converted and tri
 
 ## Larger Terrain Regions
 
-Bedrock add-ons do not expose a simple reliable setting that says "make this biome exactly 3000 blocks wide." Native biome placement is still controlled by the Bedrock world generator.
+Bedrock add-ons do not expose a simple reliable setting that says "make this biome exactly 10,000 blocks wide." Native biome placement is still controlled by the Bedrock world generator.
 
 This pack now uses two safe approaches to make areas feel much larger:
 
 - Custom biome climate weights were increased so World Uplift biomes appear as broader, more dominant regions in new chunks.
-- A scripted mega-region decorator divides the Overworld into deterministic regions of about `3072 x 3072` blocks. Each region gets one dominant style such as alpine peaks, shattered cliffs, deep valleys, old-growth highlands, or city plains. As players move, only nearby loaded chunk areas are decorated, so the region keeps the same visual identity for thousands of blocks without scanning or editing the whole world.
+- A scripted mega-region decorator divides the Overworld into deterministic regions of about `10000 x 10000` blocks. Each region gets one dominant style such as alpine peaks, shattered cliffs, deep valleys, old-growth highlands, or city plains. As players move, only nearby loaded chunk areas are decorated, so the region keeps the same visual identity for a long expedition without scanning or editing the whole world.
 
-Mountain regions now receive denser peak caps, snow/stone platforms, cliff ribs, boulder fields, water hints, and highland tree bands. This expands the mountain feel over a much larger area, while staying inside Bedrock performance limits.
+Mountain regions now receive denser peak caps, larger scripted spires, longer cliff ribs, boulder fields, water hints, and highland tree bands. This expands the mountain feel over a much larger area, while staying inside Bedrock performance limits.
+
+## Realistic Fog Rework
+
+The old fog settings were heavy enough to hide too much terrain. The new fog system focuses on atmospheric depth instead: far mountains, large valleys, city skylines, and LOD silhouettes should remain visible through soft haze.
+
+Fog is now biome-specific:
+
+- Default areas use a neutral blue-grey aerial perspective with wide visibility.
+- Alpine peaks are clearer and colder, so distant ridgelines stay readable.
+- Shattered cliffs use light rock haze with more low-air depth.
+- Deep valleys keep the strongest fog, but it is low moisture haze instead of a wall.
+- Old-growth highlands use gentle green forest haze.
+- Coastal cliffs use pale ocean mist with a visible sea horizon.
+- Hot springs use warmer steam-like haze without making the whole biome opaque.
+- Cave fog is subtle and should not block navigation.
+- Nether deep crack fog is stronger and moodier, but still readable.
+
+Fog files live in `resource_packs/WorldUpliftRP/fogs/`. Start with `be_default_realistic_fog.json` for global tuning, then adjust biome files such as `be_alpine_peaks_fog.json`, `be_deep_valleys_fog.json`, or `be_coastal_cliffs_fog.json`. Higher `fog_start`, higher `fog_end`, and lower `max_density` make the world clearer.
+
+Profiles are available through `/scriptevent be:fog profile <performance|balanced|cinematic|server>`. Performance adds slightly more far-distance blending to hide low-detail terrain. Balanced is the default. Cinematic gives the clearest long-range horizon. Server stays moderate and stable.
+
+Bedrock limitation: static biome fog is resource-pack driven. The script controller attempts to use Bedrock's `/fog` command for runtime profile and biome tests, but if a runtime blocks that command, the pack falls back to the static biome fog files without crashing.
 
 ## First-Join Guide
 
@@ -293,63 +355,6 @@ The guide covers:
 - Honest Bedrock limitations.
 
 If a player loses the book, run `/scriptevent wu:guide book`. To reopen the UI directly, run `/scriptevent wu:guide open`. To test the first-join flow again, run `/scriptevent wu:guide reset`.
-
-## Minimap Settings And Fullscreen Map
-
-Run `/scriptevent be:minimap item` to receive the `Minimap Settings` item. Use the item to open minimap settings. Sneak + use opens the fullscreen map when the minimap is enabled.
-
-Bedrock add-ons do not have the same unrestricted clickable HUD access as Java client mods. This pack includes Resource Pack UI JSON placeholders for a top-right square minimap and fullscreen frame, but the reliable runtime path is script-driven:
-
-- Settings item opens the minimap menu.
-- `/scriptevent be:minimap settings` opens the same menu.
-- The small minimap does not use the scoreboard/sidebar. The runtime fallback is an actionbar/text-grid map because Bedrock Script API does not expose a reliable per-player dynamic top-right HUD canvas.
-- Resource Pack JSON UI placeholders still define a top-right minimap frame, but scripts cannot safely draw a live map into that frame on every Bedrock platform.
-- `/scriptevent be:minimap fullscreen` opens a fullscreen `ActionFormData` map with a larger text-grid, markers, coordinates, compass-style north label, and commands.
-- `/scriptevent be:minimap close` returns to gameplay and resumes the small minimap if enabled.
-
-Minimap settings are stored per player where dynamic properties are available, with memory fallback if storage fails. If minimap is disabled, terrain sampling and marker rendering are skipped for that player.
-
-## Map Markers, Waypoints And Death Beacon
-
-The minimap tracks a latest death marker, death history, permanent waypoints, temporary waypoints, city markers, player markers, and limited entity markers. Waypoints are private by default.
-
-Death marker behavior:
-
-- On player death, the latest death location, dimension, coordinates, and tick time are saved.
-- The latest death marker appears on the minimap/fullscreen map when that layer is enabled.
-- `/scriptevent be:minimap death status` shows distance and dimension state.
-- `/scriptevent be:minimap death clear` clears the latest marker.
-- The death beacon uses particles only by default. It pulses near the saved death location and only when the player is within the configured active radius.
-
-Waypoint behavior:
-
-- `/scriptevent be:minimap waypoint add <name>` creates a permanent waypoint at your current location.
-- `/scriptevent be:minimap temp add <name>` creates a temporary waypoint that expires.
-- The fullscreen map includes Add Waypoint, Add Temporary Waypoint, Waypoint List, cursor movement, layer settings, and center-on-death options.
-- Direct right-click placement on the fullscreen map is not guaranteed in Bedrock. The fallback is cursor/form mode: move the cursor with form buttons or `/scriptevent be:minimap cursor up/down/left/right`, then place a temporary marker with `/scriptevent be:minimap cursor place_temp`.
-
-Layer toggles:
-
-- `deaths`
-- `waypoints`
-- `temp`
-- `players`
-- `mobs`
-- `cities`
-- `landmarks`
-
-Example: `/scriptevent be:minimap layer mobs off`.
-
-Use `/scriptevent be:minimap status` to see the current render path. `render=actionbar_text_grid` means the scoreboard-free fallback is active.
-
-Performance notes:
-
-- No minimap work runs for players with minimap disabled.
-- Small map updates are interval-based, not every tick.
-- Fullscreen map uses profile-based grid sizes: `performance`, `balanced`, `cinematic`, and `server`.
-- Entity markers only render on fullscreen map and are capped.
-- Marker caps and clustering reduce spam.
-- Death beacon particles pulse on an interval and only near the death marker.
 
 ## UI Branding
 
@@ -428,7 +433,7 @@ None of these systems scans the whole world. They operate around active players 
 
 ## Bedrock Evolved: Terrain Uplift
 
-Terrain Uplift is integrated into this same add-on under the `be_terrain` data namespace and `/scriptevent be:terrain` command namespace. It is terrain-only: biomes, scenic features, waterfalls, snowlines, cave mouths, old roads, coastal cliffs, forest density, rare landmarks, underground ruins, hot springs, and valley ambience.
+Terrain Uplift is integrated into this same add-on under the `be_terrain` data namespace and `/scriptevent be:terrain` command namespace. It is terrain-only: biomes, scenic features, waterfalls, snowlines, cave mouths, old roads, coastal cliffs, forest density, rare landmarks, underground ruins, hot springs, rare fireflies, waterfall mist, and valley ambience.
 
 Commands:
 
@@ -445,7 +450,7 @@ Commands:
 - `/scriptevent be:terrain snowline`
 - `/scriptevent be:terrain waterfalls`
 
-The module adds custom biome JSON prototypes for alpine peaks, alpine foothills, shattered cliffs, deep valleys, old-growth highlands, highland groves, crater lakes, coastal cliffs, hot springs, and forest edges. It also adds feature and feature-rule JSON for mountain spires, boulders, snowline patches, waterfalls, cave mouths, forest detail, rivers, ruins, coastal cliffs, fantasy floating cliffs, and hot springs.
+The module adds custom biome JSON prototypes for alpine peaks, alpine foothills, shattered cliffs, deep valleys, old-growth highlands, highland groves, crater lakes, coastal cliffs, hot springs, and forest edges. It also adds feature and feature-rule JSON for mountain spires, boulders, snowline patches, waterfalls, cave mouths, forest detail, rivers, ruins, coastal cliffs, fantasy floating cliffs, and hot springs. Mountain and highland biomes now bias harder toward mountain-style height and higher peak feature placement in new chunks.
 
 Bedrock limitation notes:
 

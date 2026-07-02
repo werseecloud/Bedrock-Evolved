@@ -1,12 +1,14 @@
 import { system, world } from "@minecraft/server";
 import { RIGHTCLICK_HARVEST_CONFIG } from "../config.js";
 import { Logger } from "../utils/logger.js";
+import { getSelectedItem } from "../utils/inventory.js";
 import { detectCrop } from "./cropDetector.js";
 import { calculateDrops } from "./dropCalculator.js";
 import { damageHoeIfNeeded, isAllowedHarvestTool } from "./durabilityService.js";
 import { actionbar, playHarvestEffects } from "./particleService.js";
 import { canHarvest } from "./permissionService.js";
 import { harvestAndReplant } from "./replantService.js";
+import { isWorldEditAxeItem } from "../worldedit/worldEditTool.js";
 
 const cooldowns = new Map();
 let initialized = false;
@@ -29,6 +31,9 @@ function subscribeOptionalInteractEvents() {
           return;
         }
         if (event.isFirstEvent === false && RIGHTCLICK_HARVEST_CONFIG.PREVENT_DUPLICATE_INTERACTION) {
+          return;
+        }
+        if (isWorldEditAxeItem(event.itemStack || getSelectedItem(event.player))) {
           return;
         }
         const block = event.block;
@@ -54,6 +59,9 @@ function subscribeOptionalInteractEvents() {
           return;
         }
         if (event.isFirstEvent === false && RIGHTCLICK_HARVEST_CONFIG.PREVENT_DUPLICATE_INTERACTION) {
+          return;
+        }
+        if (isWorldEditAxeItem(event.itemStack || getSelectedItem(event.player))) {
           return;
         }
         const location = copyBlockLocation(event.block);

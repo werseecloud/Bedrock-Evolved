@@ -14,7 +14,7 @@
         "white_ash": 0.0
       },
       "minecraft:overworld_height": {
-        "noise_type": "highlands"
+        "noise_type": "mountains"
       },
       "minecraft:surface_parameters": {
         "sea_floor_depth": 6,
@@ -34,7 +34,7 @@
         ]
       },
       "minecraft:fog_appearance": {
-        "fog_identifier": "uplift:warm_city_morning_fog"
+        "fog_identifier": "be:old_growth_highlands_fog"
       },
       "minecraft:tags": {
         "tags": [

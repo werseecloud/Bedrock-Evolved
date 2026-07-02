@@ -8,7 +8,7 @@ const PAGES = Object.freeze({
     title: "Overview",
     body: [
       "World Uplift: Cities & Deep Realms upgrades world exploration with bigger-feeling terrain, staged city expansion, deep realm transitions, LOD skyline illusions, camera movement, RightClick Harvest, Better Than Mending, Bridging, and XP Clumps.",
-      "It also includes the Bedrock Evolved Minimap with settings item, fullscreen map, waypoints, death marker, and death beacon fallback controls.",
+      "Loaded village-like areas now spawn Builder villagers that harvest, gather resources, and keep expanding their town while players are nearby.",
       "",
       "This add-on stays inside Bedrock limits. It does not force infinite height, real 2000 chunk rendering, or native engine changes."
     ].join("\n")
@@ -16,7 +16,9 @@ const PAGES = Object.freeze({
   terrain: {
     title: "Terrain & Regions",
     body: [
-      "Mega regions make areas feel thousands of blocks wide while only decorating loaded chunks near players.",
+      "Mega regions make areas feel about 10,000 x 10,000 blocks wide while only decorating loaded chunks near players.",
+      "Mountain regions now push bigger scripted spires, longer ridges, denser peak caps, and higher waterfall sources.",
+      "Forests can show rare fireflies at night. Custom waterfalls can show soft mist particles.",
       "",
       "Useful commands:",
       "/scriptevent wu:regions status",
@@ -25,10 +27,25 @@ const PAGES = Object.freeze({
       "/scriptevent wu:lod status"
     ].join("\n")
   },
+  fog: {
+    title: "Realistic Fog",
+    body: [
+      "Fog is lighter and biome-specific so distant mountains, valleys, city skylines, and LOD silhouettes stay visible.",
+      "Alpine peaks are clearer, valleys have low moisture haze, forests use gentle green morning haze, coasts use pale ocean mist, and caves stay subtle.",
+      "",
+      "Useful commands:",
+      "/scriptevent be:fog status",
+      "/scriptevent be:fog profile cinematic",
+      "/scriptevent be:fog profile performance",
+      "/scriptevent be:fog biome alpine",
+      "/scriptevent be:fog biome valley"
+    ].join("\n")
+  },
   cities: {
     title: "Cities",
     body: [
       "Village-like areas can become staged towns and cities with roads, districts, farms, walls, towers, markets, storage, barracks, mines, and town halls.",
+      "Each loaded registered village keeps up to 3 visible Builder villagers. They harvest mature crops, gather resources, and place blocks or queue city stages over time.",
       "",
       "Useful commands:",
       "/scriptevent wu:city create",
@@ -55,9 +72,48 @@ const PAGES = Object.freeze({
       "Useful commands:",
       "/scriptevent rch:status",
       "/scriptevent qm:status",
+      "/scriptevent qol:status",
+      "/scriptevent qol:quick_stack",
+      "/scriptevent worldedit:wand",
+      "/scriptevent worldedit:set stone",
+      "/scriptevent worldedit:undo",
       "/scriptevent qm:profile survival",
       "/scriptevent qm:profile performance",
       "/scriptevent qm:profile qol"
+    ].join("\n")
+  },
+  qol: {
+    title: "Survival QoL",
+    body: [
+      "Auto Torch Refill keeps torch hotbar slots stocked from inventory.",
+      "Tree Capitator Lite chops connected logs when you sneak-break a tree with an axe and costs durability.",
+      "Quick Stack moves non-hotbar items into nearby chests or barrels that already contain matching items.",
+      "Death Coordinates sends your death position privately.",
+      "Biome Enter Messages announce custom World Uplift biomes where biome lookup is available.",
+      "",
+      "Useful commands:",
+      "/scriptevent qol:status",
+      "/scriptevent qol:quick_stack",
+      "/scriptevent qol:off quick_stack",
+      "/scriptevent qol:on all"
+    ].join("\n")
+  },
+  worldedit: {
+    title: "WorldEdit",
+    body: [
+      "WorldEdit uses a named wooden axe for safe Bedrock-compatible region selection.",
+      "",
+      "Break block with axe: pos1",
+      "Use axe on block: pos2",
+      "",
+      "Useful commands:",
+      "/scriptevent worldedit:wand",
+      "/scriptevent worldedit:set stone",
+      "/scriptevent worldedit:replace dirt stone",
+      "/scriptevent worldedit:walls oak_planks",
+      "/scriptevent worldedit:outline glass",
+      "/scriptevent worldedit:clear",
+      "/scriptevent worldedit:undo"
     ].join("\n")
   },
   camera: {
@@ -70,21 +126,6 @@ const PAGES = Object.freeze({
       "/scriptevent co:camera profile balanced",
       "/scriptevent co:camera intensity 0.5",
       "/scriptevent co:camera off"
-    ].join("\n")
-  },
-  minimap: {
-    title: "Minimap",
-    body: [
-      "Run /scriptevent be:minimap item to get the Minimap Settings item.",
-      "",
-      "Use it to enable the minimap or open fullscreen map. Sneak + use opens fullscreen when enabled.",
-      "",
-      "Useful commands:",
-      "/scriptevent be:minimap settings",
-      "/scriptevent be:minimap on",
-      "/scriptevent be:minimap fullscreen",
-      "/scriptevent be:minimap waypoint add Home",
-      "/scriptevent be:minimap death status"
     ].join("\n")
   },
   performance: {
@@ -115,11 +156,13 @@ export function showGuideHome(player) {
     .body("Choose a guide page. You can reopen this by using the Bedrock Evolved Guide book or running /scriptevent wu:guide.")
     .button("Overview")
     .button("Terrain & Mega Regions")
+    .button("Realistic Fog")
     .button("Cities")
     .button("Deep Realms")
     .button("Quality Mechanics")
+    .button("Survival QoL")
+    .button("WorldEdit")
     .button("Camera")
-    .button("Minimap")
     .button("Performance")
     .button("Bedrock Limits");
 
@@ -127,7 +170,7 @@ export function showGuideHome(player) {
     if (response.canceled || response.selection === undefined) {
       return;
     }
-    const pageKeys = ["overview", "terrain", "cities", "deep", "quality", "camera", "minimap", "performance", "limits"];
+    const pageKeys = ["overview", "terrain", "fog", "cities", "deep", "quality", "qol", "worldedit", "camera", "performance", "limits"];
     const pageKey = pageKeys[response.selection];
     if (pageKey) {
       showGuidePage(player, pageKey);

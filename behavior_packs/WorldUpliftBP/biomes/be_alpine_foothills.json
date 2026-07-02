@@ -17,7 +17,7 @@
         "white_ash": 0
       },
       "minecraft:overworld_height": {
-        "noise_type": "hills"
+        "noise_type": "mountains"
       },
       "minecraft:surface_parameters": {
         "sea_floor_depth": 5,
